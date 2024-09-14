@@ -3,7 +3,7 @@ import { Redirect } from 'expo-router'
 
 const Welcome = () => {
   return (
-    <Redirect href="/home"/>
+    <Redirect href="/settings"/>
   )
 }
 

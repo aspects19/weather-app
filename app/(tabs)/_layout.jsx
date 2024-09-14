@@ -2,10 +2,8 @@ import React from 'react';
 import { View } from 'react-native';
 import { Tabs } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import Feather from '@expo/vector-icons/Feather';
-import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
-import { Entypo } from '@expo/vector-icons';
+import { Entypo, Ionicons } from '@expo/vector-icons';
 
 
 const TabIcon = ({ provider: IconComponent, icon, focused }) => {
@@ -23,16 +21,17 @@ const TabIcon = ({ provider: IconComponent, icon, focused }) => {
 
 const RootLayout = () => {
   return (
-    < View className= 'h-full bg-black'>
+    < View className= 'h-full bg-primary'>
       <Tabs
         screenOptions={{
           tabBarShowLabel: false,
           tabBarStyle: {
-            backgroundColor: "#403f41",
+            backgroundColor: "#1d1f29",
             borderTopWidth: 1,
             borderTopColor: "#232533",
-            height: 60,
+            height: 50,
             marginBottom: 27,
+            marginTop: 7,
             marginHorizontal:16,
             borderRadius: 20,
             
@@ -41,6 +40,32 @@ const RootLayout = () => {
           },
         }}
       >
+        <Tabs.Screen
+          name="search"
+          options={{
+            headerShown: false,
+            tabBarIcon: ({ focused }) => (
+              <TabIcon
+                provider={Ionicons} 
+                icon="search"
+                focused={focused}
+              />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="settings"
+          options={{
+            headerShown: false,
+            tabBarIcon: ({ focused }) => (
+              <TabIcon
+                provider={Ionicons} 
+                icon="settings-outline"
+                focused={focused}
+              />
+            ),
+          }}
+        />
         <Tabs.Screen
           name="home"
           options={{
@@ -54,46 +79,6 @@ const RootLayout = () => {
             ),
           }}
         />
-        <Tabs.Screen
-          name="search"
-          options={{
-            headerShown: false,
-            tabBarIcon: ({ focused }) => (
-              <TabIcon
-                provider={Feather} 
-                icon="search"
-                focused={focused}
-              />
-            ),
-          }}
-        />
-        <Tabs.Screen
-          name="notification"
-          options={{
-            headerShown: false,
-            tabBarIcon: ({ focused }) => (
-              <TabIcon
-                provider={FontAwesome5} 
-                icon="bell"
-                focused={focused}
-              />
-            ),
-          }}
-        />
-        <Tabs.Screen
-          name="maps"
-          options={{
-            headerShown: false,
-            tabBarIcon: ({ focused }) => (
-              <TabIcon
-                provider={Entypo} 
-                icon="map"
-                focused={focused}
-              />
-            ),
-          }}
-        />
-        
         
       </Tabs>
 

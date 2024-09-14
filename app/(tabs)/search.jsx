@@ -1,11 +1,14 @@
-import { View, Text } from 'react-native'
+import { View, Text, ScrollView } from 'react-native'
 import React from 'react'
+import Home from './home'
 
 const search = () => {
   return (
-    <View>
-      <Text>search</Text>
-    </View>
+    <ScrollView className='h-full bg-primary'>
+      <Home/>
+    </ScrollView>
+    
+    
   )
 }
 
