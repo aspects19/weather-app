@@ -41,19 +41,6 @@ const RootLayout = () => {
         }}
       >
         <Tabs.Screen
-          name="search"
-          options={{
-            headerShown: false,
-            tabBarIcon: ({ focused }) => (
-              <TabIcon
-                provider={Ionicons} 
-                icon="search"
-                focused={focused}
-              />
-            ),
-          }}
-        />
-        <Tabs.Screen
           name="settings"
           options={{
             headerShown: false,
@@ -66,6 +53,20 @@ const RootLayout = () => {
             ),
           }}
         />
+        <Tabs.Screen
+          name="search"
+          options={{
+            headerShown: false,
+            tabBarIcon: ({ focused }) => (
+              <TabIcon
+                provider={Ionicons} 
+                icon="search"
+                focused={focused}
+              />
+            ),
+          }}
+        />
+        
         <Tabs.Screen
           name="home"
           options={{
