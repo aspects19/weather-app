@@ -1,9 +1,8 @@
-import { View, Text, Image, ImageBackground, ScrollView } from 'react-native'
+import { View, TextInput, Text, Image, Alert, Pressable, ScrollView, Modal } from 'react-native'
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { BlurView } from 'expo-blur';
-import { useLocalSearchParams } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
+import getWeather from '../../components/getWeather';
 import {
   FontAwesome,
   Fontisto,
@@ -11,16 +10,77 @@ import {
   Feather,
   } from '@expo/vector-icons';
 
-import icons from '../../constants/icons';
+import icons from '../../constants/icons'; //available icons { clearNight, cloudySun, rain, rainySun, thundestorm, sunny, profile, plus,}
+
+
 
 
 const home = () => {
+  const [modalVisible, setModalVisible] = useState(true);
+  const [location, setLocation] = useState("");
+  const [weatherDataInfo, setWeatherDataInfo] = useState(
+    {
+      city: null,
+      country: null,
+      description: null,
+      temperature : null,
+      precipitation: null,
+    }
+  );
+  const [ isloading, setIsLoading] = useState(true);
 
-  const [weatherDataInfo, setWeatherDataInfo] = useState(null);
-  const [ isloading, setIsLoading] = useState(false);
+  const handleShowModal = () => {
+    setModalVisible(true);
+  };
 
-  const { weatherData } = useLocalSearchParams();
+  const handleDismissModal = () => {
+    setModalVisible(false);
+  };
 
+
+  const handleOnSubmitEditing = async () => {
+    if (!location) return;
+    setIsLoading(true);
+    try {
+      const WeatherData = await getWeather(location);
+      if (WeatherData) {
+        setWeatherDataInfo({
+          city: WeatherData.localizedName,
+          country: WeatherData.countryName,
+          description: WeatherData.weatherText,
+          temperature : WeatherData.temperature,
+          precipitation: WeatherData.precipitationType,
+        });
+      };
+    } catch (err) {
+      if (isloading) {
+        
+      }
+    }
+      
+  };
+
+  const CustomModal = ({ icon, title, text, visible, dismissCallback }) => {
+    return (
+      <Modal 
+        animationType='fade'
+        transparent={true}
+        visible={visible}
+        onRequestClose={dismissCallback}
+      >
+        <View className='flex-1 justify-center items-center bg-[#0000007e]'>
+          <View className='m-5 bg-[#3d3c3c] rounded-xl p-3 items-center'>
+            {icon}
+            <Text className='text-lg font-bold text-white mb-2'>{title}</Text>
+            <Text className='text-center text-slate-300 mb-4'>{text}</Text>
+            <Pressable className='rounded-xl p-3 bg-[#ffe294]' onPress={dismissCallback}>
+              <Text className='text-white font-bold text-center'>Dismiss</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+    );
+  };
 
   const WeatherCard = () => {
     return (
@@ -38,11 +98,35 @@ const home = () => {
     <SafeAreaView>
       <View className='h-full bg-primary pl-2'>
           <View>
-            <View className='w-full'>
+            <View className='w-full '>
               
               <View className=" w-full flex items-center text-center content-center">
                 <View className='flex flex-row justify-between px-3 pt-4 mt-2 w-full'>
                   <FontAwesome name="navicon" size={19} color="white" />
+                  <View className="w-8/12">
+                    <View className="relative w-full">
+                      <TextInput
+                        onChangeText={(textchange) => setLocation(textchange)} 
+                        onSubmitEditing={handleOnSubmitEditing} 
+                        value={location}
+                        placeholder="Type your location"
+                        placeholderTextColor={"#333941"}
+                        cursorColor={"grey"}
+                        className="h-8 w-full bg-[#c1c3c5] rounded-lg pl-3 pr-10"
+                      />
+                      <Feather
+                        name="search"
+                        size={20}
+                        color="black"
+                        style={{
+                          position: "absolute",
+                          right: 9,
+                          top: "50%",
+                          transform: [{ translateY: -12 }],
+                        }}
+                      />
+                    </View>
+                  </View>
                   <FontAwesome name="calendar" size={19} color="white" />
                 </View>
                 <Text className="text-white font-semibold text-xl py-4 pt-8">Nairobi, <Text className="font-normal">Kenya</Text></Text>
@@ -64,6 +148,18 @@ const home = () => {
                   </View>
                 </View>
               </View>
+            </View>
+            <View className='flex-1 justify-center items-center'>
+              <Pressable onPress={handleShowModal}>
+                <Text className='text-blue-500'>Show Modal</Text>
+              </Pressable>
+              <CustomModal 
+                icon={<Text>🔔</Text>}  // Example icon
+                title="Alert!"
+                text="This is an important message."
+                visible={modalVisible}
+                dismissCallback={handleDismissModal}
+              />
             </View>
             <View>
               <Text className='text-white text-xl pt-3 font-semibold pl-2'>🕜 Hourly Forecast</Text>

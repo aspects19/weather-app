@@ -66,22 +66,10 @@ const Settings = () => {
           </View>
 
           <View className="mt-3">
-            <SettingCard
-              IconProvider={FontAwesome}
-              icon="bell-o"
-              text="Turn on notification"
-              toggle={notificationStatus}
-              onPress={handleNotificationToggle}
-            />
-            <SettingCard
-              IconProvider={FontAwesome6}
-              icon="temperature-low"
-              text="Use degrees Celcius"
-              toggle={celcius}
-              onPress={handleCelciusStatus}
-            />
-            <SettingCard IconProvider={Ionicons} icon="share-social" text="Tell your friends?" />
-            <SettingCard IconProvider={Octicons} icon="repo" text="Project repo" />
+            <SettingCard IconProvider={FontAwesome} icon="bell-o" text="Turn on notification" toggle={notificationStatus}onPress={handleNotificationToggle} />
+            <SettingCard IconProvider={FontAwesome6} icon="temperature-low" text="Use degrees Celcius" toggle={celcius} onPress={handleCelciusStatus} />
+            <SettingCard IconProvider={Ionicons} icon="share-social" text="Tell your friends?" onPress={()=>Linking.openURL("https://drive.google.com")}/>
+            <SettingCard IconProvider={Octicons} icon="repo" text="Project repo" onPress={()=>Linking.openURL("https://github.com/aspects19/weather-app")} />
 
             <BlurView intensity={1} tint="dark" className="h-20 w-11/12 mx-4 mr-10 pb-1 pt-3 rounded-[15px] justify-around items-center">
               <Text className="text-slate-200 -ml-9">version : 1.0.1</Text>
