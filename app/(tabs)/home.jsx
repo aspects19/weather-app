@@ -1,7 +1,9 @@
 import { View, Text, Image, ImageBackground, ScrollView } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { BlurView } from 'expo-blur';
+import { useLocalSearchParams } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
 import {
   FontAwesome,
   Fontisto,
@@ -13,6 +15,12 @@ import icons from '../../constants/icons';
 
 
 const home = () => {
+
+  const [weatherDataInfo, setWeatherDataInfo] = useState(null);
+  const [ isloading, setIsLoading] = useState(false);
+
+  const { weatherData } = useLocalSearchParams();
+
 
   const WeatherCard = () => {
     return (
@@ -44,15 +52,15 @@ const home = () => {
                 <View className="flex flex-row justify-between w-full px-8 pb-6 pt-7">
                   <View className="flex flex-row items-center">
                     <Feather name="wind" size={24} color="white" />
-                    <Text className="text-white">11km/hr</Text>
+                    <Text className="text-white pl-2">11km/hr</Text>
                   </View>
                   <View className="flex flex-row items-center">
                     <Ionicons name="water-outline" size={24} color="white" />
-                    <Text className="text-white">02%</Text>
+                    <Text className="text-white pl-2">02%</Text>
                   </View>
                   <View className="flex flex-row items-center">
                     <Fontisto name="day-sunny" size={24} color="white" />
-                    <Text className="text-white">8hr</Text>
+                    <Text className="text-white pl-2">8hr</Text>
                   </View>
                 </View>
               </View>

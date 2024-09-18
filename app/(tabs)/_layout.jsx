@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { Tabs } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import Feather from '@expo/vector-icons/Feather';
-import { Entypo, Ionicons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
 
 const TabIcon = ({ provider: IconComponent, icon, focused }) => {
@@ -30,43 +30,14 @@ const RootLayout = () => {
             borderTopWidth: 1,
             borderTopColor: "#232533",
             height: 50,
-            marginBottom: 27,
+            marginBottom: 16,
             marginTop: 7,
             marginHorizontal:16,
             borderRadius: 20,
-            
-
-            
+            paddingHorizontal: 10
           },
         }}
       >
-        <Tabs.Screen
-          name="settings"
-          options={{
-            headerShown: false,
-            tabBarIcon: ({ focused }) => (
-              <TabIcon
-                provider={Ionicons} 
-                icon="settings-outline"
-                focused={focused}
-              />
-            ),
-          }}
-        />
-        <Tabs.Screen
-          name="search"
-          options={{
-            headerShown: false,
-            tabBarIcon: ({ focused }) => (
-              <TabIcon
-                provider={Ionicons} 
-                icon="search"
-                focused={focused}
-              />
-            ),
-          }}
-        />
-        
         <Tabs.Screen
           name="home"
           options={{
@@ -80,10 +51,23 @@ const RootLayout = () => {
             ),
           }}
         />
+        <Tabs.Screen
+          name="settings"
+          options={{
+            headerShown: false,
+            tabBarIcon: ({ focused }) => (
+              <TabIcon
+                provider={Ionicons} 
+                icon="settings-outline"
+                focused={focused}
+              />
+            ),
+          }}
+        />
         
       </Tabs>
 
-      <StatusBar backgroundColor="#161622" style="light" />
+      <StatusBar backgroundColor="#161622" style="light"  />
     </View>
   );
 };

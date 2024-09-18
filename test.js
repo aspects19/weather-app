@@ -52,9 +52,5 @@ async function getWeather(city) {
   }
 }
 
-(async () => {
-  const weatherData = await getWeather('Nairobi');
-  console.log(weatherData);
-})();
 
 export default getWeather;

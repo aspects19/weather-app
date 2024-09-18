@@ -4,16 +4,21 @@ import Home from './home';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Feather from '@expo/vector-icons/Feather';
 import getWeather from '../../test';
+import { useRouter } from 'expo-router';
 
 const Search = () => {
   const [location, setLocation] = useState("");
   const [metricSystem, setMetricSystem] = useState("degrees");
+  const router = useRouter();
 
   const handleOnSubmitEditing = async () => {
-    if (!location) return;  // Prevents making an empty request
+    if (!location) return;  
     const WeatherData = await getWeather(location);
-    console.log(WeatherData);
-    setLocation(""); // Clears the input after submitting
+    setLocation(""); 
+    router.push({
+      pathname: "/home",
+      params: { weatherData: JSON.stringify(WeatherData) },
+    })
   };
 
   return (
