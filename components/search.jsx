@@ -1,9 +1,9 @@
 import { View, Text, ScrollView, TextInput } from 'react-native';
 import React, { useState } from 'react';
-import Home from './home';
+import Home from '../app/(tabs)/home';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Feather from '@expo/vector-icons/Feather';
-import getWeather from '../../test';
+import getWeather from '../test';
 import { useRouter } from 'expo-router';
 
 const Search = () => {

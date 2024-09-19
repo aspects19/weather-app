@@ -69,11 +69,10 @@ const home = () => {
         onRequestClose={dismissCallback}
       >
         <View className='flex-1 justify-center items-center bg-[#0000007e]'>
-          <View className='m-5 bg-[#3d3c3c] rounded-xl p-3 items-center'>
-            {icon}
-            <Text className='text-lg font-bold text-white mb-2'>{title}</Text>
+          <View className='m-5 bg-[#919192] rounded-xl p-3 items-center w-8/12'>
+            <Text className='text-lg font-bold text-white mb-2 pl-2'>{icon} {title}</Text>
             <Text className='text-center text-slate-300 mb-4'>{text}</Text>
-            <Pressable className='rounded-xl p-3 bg-[#ffe294]' onPress={dismissCallback}>
+            <Pressable className='rounded-xl p-3 bg-[#ffe294] ' onPress={dismissCallback}>
               <Text className='text-white font-bold text-center'>Dismiss</Text>
             </Pressable>
           </View>
@@ -150,9 +149,6 @@ const home = () => {
               </View>
             </View>
             <View className='flex-1 justify-center items-center'>
-              <Pressable onPress={handleShowModal}>
-                <Text className='text-blue-500'>Show Modal</Text>
-              </Pressable>
               <CustomModal 
                 icon={<Text>🔔</Text>}  // Example icon
                 title="Alert!"
