@@ -1,9 +1,11 @@
 import React from 'react'
-import { Redirect } from 'expo-router'
+import { Redirect } from 'expo-router';
+import 'react-native-reanimated';
+import 'react-native-gesture-handler';
 
 const Welcome = () => {
   return (
-    <Redirect href="/settings"/>
+    <Redirect href="/home"/>
   )
 }
 

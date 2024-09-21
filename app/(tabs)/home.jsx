@@ -1,90 +1,84 @@
-import { View, TextInput, Text, Image, Alert, Pressable, ScrollView, Modal } from 'react-native'
-import React, { useState } from 'react'
+import { View, TextInput, Text, Image, ScrollView, } from 'react-native';
+import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { BlurView } from 'expo-blur';
+import { MotiView } from 'moti';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import getWeather from '../../components/getWeather';
 import {
   FontAwesome,
   Fontisto,
   Ionicons,
   Feather,
+  AntDesign,
   } from '@expo/vector-icons';
 
 import icons from '../../constants/icons'; //available icons { clearNight, cloudySun, rain, rainySun, thundestorm, sunny, profile, plus,}
+import CustomAlert from '../../components/customAlert';
+import CustomModal from '../../components/customModal';
 
 
 
 
 const home = () => {
-  const [modalVisible, setModalVisible] = useState(true);
   const [location, setLocation] = useState("");
-  const [weatherDataInfo, setWeatherDataInfo] = useState(
-    {
-      city: null,
+  const [weatherDataInfo, setWeatherDataInfo] = useState({
+      name: null,
       country: null,
-      description: null,
+      cloudCover: null,
+      humidity: null,
+      precipitationProbability: null,
+      pressure: null,
+      rainIntensity: null,
       temperature : null,
-      precipitation: null,
+      visibility: null,
+      windDirection: null,
+      windSpeed: null,
     }
   );
-  const [ isloading, setIsLoading] = useState(true);
+  const [ isloading, setIsLoading] = useState(false);
 
-  const handleShowModal = () => {
-    setModalVisible(true);
-  };
-
-  const handleDismissModal = () => {
-    setModalVisible(false);
-  };
-
+  
 
   const handleOnSubmitEditing = async () => {
     if (!location) return;
     setIsLoading(true);
+    setLocation("");
     try {
       const WeatherData = await getWeather(location);
       if (WeatherData) {
         setWeatherDataInfo({
-          city: WeatherData.localizedName,
-          country: WeatherData.countryName,
-          description: WeatherData.weatherText,
+          name: WeatherData.name,
+          country: WeatherData.country,
+          cloudCover: WeatherData.cloudCover,
+          humidity: WeatherData.humidity,
+          precipitationProbability: WeatherData.precipitationProbability,
+          pressure: WeatherData.pressure,
+          rainIntensity: WeatherData.rainIntensity,
           temperature : WeatherData.temperature,
-          precipitation: WeatherData.precipitationType,
+          visibility: WeatherData.visibility,
+          windDirection: WeatherData.windDirection,
+          windSpeed: WeatherData.windSpeed,
         });
       };
-    } catch (err) {
-      if (isloading) {
-        
-      }
-    }
+    } catch (error) {
+      return (
+        <CustomAlert 
+          title={"⚠️ Error"}
+          text={"An error occured and we were unable to fetch weather info."}
+        />  
+      )
+    };
       
   };
 
-  const CustomModal = ({ icon, title, text, visible, dismissCallback }) => {
-    return (
-      <Modal 
-        animationType='fade'
-        transparent={true}
-        visible={visible}
-        onRequestClose={dismissCallback}
-      >
-        <View className='flex-1 justify-center items-center bg-[#0000007e]'>
-          <View className='m-5 bg-[#919192] rounded-xl p-3 items-center w-8/12'>
-            <Text className='text-lg font-bold text-white mb-2 pl-2'>{icon} {title}</Text>
-            <Text className='text-center text-slate-300 mb-4'>{text}</Text>
-            <Pressable className='rounded-xl p-3 bg-[#ffe294] ' onPress={dismissCallback}>
-              <Text className='text-white font-bold text-center'>Dismiss</Text>
-            </Pressable>
-          </View>
-        </View>
-      </Modal>
-    );
-  };
 
   const WeatherCard = () => {
     return (
       
-        <BlurView intensity={80} tint='dark' className='flex items-center rounded-lg overflow-hidden h-32 w-24 mt-4 mr-3 py-4 bg-[#4c558679]'>
+        <BlurView 
+
+          intensity={80} tint='dark' className='flex items-center rounded-lg overflow-hidden h-32 w-24 mt-4 mr-3 py-4 bg-[#4c558679]'>
           <Image resizeMode='contain' source={icons.clearNight} className='h-12 w-12'/>
           <Text className='text-white text-lg pt-1'>Now</Text>
           <Text className='text-white text-xl font-semibold'>29°C</Text>
@@ -128,15 +122,19 @@ const home = () => {
                   </View>
                   <FontAwesome name="calendar" size={19} color="white" />
                 </View>
-                <Text className="text-white font-semibold text-xl py-4 pt-8">Nairobi, <Text className="font-normal">Kenya</Text></Text>
+                <Text className="text-white font-semibold text-xl py-4 pt-8">{weatherDataInfo.name}<Text className="font-normal">{` ${weatherDataInfo.country}`}</Text></Text>
                 <Image source={icons.clearNight} resizeMode="contain" className="h-48 w-48" />
                 <Text className="font-extrabold text-white text-[37px] pt-3">29°C</Text>
                 <Text className="font-normal text-white text-lg">Expecting some light rain today.</Text>
-                <View className="flex flex-row justify-between w-full px-8 pb-6 pt-7">
-                  <View className="flex flex-row items-center">
+                <View className="flex flex-row justify-between w-full px-8 mb-3 pt-7">
+                  <MotiView 
+                    from={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ type: 'timing' }}
+                    className="flex flex-row items-center">
                     <Feather name="wind" size={24} color="white" />
                     <Text className="text-white pl-2">11km/hr</Text>
-                  </View>
+                  </MotiView>
                   <View className="flex flex-row items-center">
                     <Ionicons name="water-outline" size={24} color="white" />
                     <Text className="text-white pl-2">02%</Text>
@@ -146,16 +144,23 @@ const home = () => {
                     <Text className="text-white pl-2">8hr</Text>
                   </View>
                 </View>
+                <View className="flex flex-row justify-between w-full px-8 pb-6 pt-2">
+                  <View className="flex flex-row items-center">
+                    <Ionicons name="rainy-outline" size={24} color="white" /> 
+                    <Text className="text-white pl-2">11</Text>
+                  </View>
+                  <View className="flex flex-row items-center">
+                    <AntDesign name="cloudo" size={24} color="white" />
+                    <Text className="text-white pl-2">02%</Text>
+                  </View>
+                  <View className="flex flex-row items-center">
+                    <Fontisto name="fog" size={18} color="white" />
+                    <Text className="text-white pl-2">20</Text>
+                  </View>
+                </View>
               </View>
             </View>
             <View className='flex-1 justify-center items-center'>
-              <CustomModal 
-                icon={<Text>🔔</Text>}  // Example icon
-                title="Alert!"
-                text="This is an important message."
-                visible={modalVisible}
-                dismissCallback={handleDismissModal}
-              />
             </View>
             <View>
               <Text className='text-white text-xl pt-3 font-semibold pl-2'>🕜 Hourly Forecast</Text>
