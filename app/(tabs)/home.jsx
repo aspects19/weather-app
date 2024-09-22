@@ -2,9 +2,10 @@ import { View, TextInput, Text, Image, ScrollView, } from 'react-native';
 import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { BlurView } from 'expo-blur';
-import { MotiView } from 'moti';
+import { StatusBar } from 'expo-status-bar';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import getWeather from '../../components/getWeather';
+import HomeSkeleton from '../../components/skeleton';
 import {
   FontAwesome,
   Fontisto,
@@ -16,6 +17,7 @@ import {
 import icons from '../../constants/icons'; //available icons { clearNight, cloudySun, rain, rainySun, thundestorm, sunny, profile, plus,}
 import CustomAlert from '../../components/customAlert';
 import CustomModal from '../../components/customModal';
+import { Skeleton } from 'moti/skeleton';
 
 
 
@@ -36,7 +38,7 @@ const home = () => {
       windSpeed: null,
     }
   );
-  const [ isloading, setIsLoading] = useState(false);
+  const [ isloading, setIsLoading] = useState(true);
 
   
 
@@ -89,7 +91,9 @@ const home = () => {
 
   return (
     <SafeAreaView>
+      <StatusBar backgroundColor="#161622" style="light" />
       <View className='h-full bg-primary pl-2'>
+        { isloading ? <HomeSkeleton/> :
           <View>
             <View className='w-full '>
               
@@ -122,19 +126,15 @@ const home = () => {
                   </View>
                   <FontAwesome name="calendar" size={19} color="white" />
                 </View>
-                <Text className="text-white font-semibold text-xl py-4 pt-8">{weatherDataInfo.name}<Text className="font-normal">{` ${weatherDataInfo.country}`}</Text></Text>
+                <Text className="text-white font-semibold text-xl py-4 pt-8">Wendani, <Text className="font-normal">Nairobi</Text></Text>
                 <Image source={icons.clearNight} resizeMode="contain" className="h-48 w-48" />
                 <Text className="font-extrabold text-white text-[37px] pt-3">29°C</Text>
                 <Text className="font-normal text-white text-lg">Expecting some light rain today.</Text>
                 <View className="flex flex-row justify-between w-full px-8 mb-3 pt-7">
-                  <MotiView 
-                    from={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ type: 'timing' }}
-                    className="flex flex-row items-center">
+                  <View className="flex flex-row items-center">
                     <Feather name="wind" size={24} color="white" />
                     <Text className="text-white pl-2">11km/hr</Text>
-                  </MotiView>
+                  </View>
                   <View className="flex flex-row items-center">
                     <Ionicons name="water-outline" size={24} color="white" />
                     <Text className="text-white pl-2">02%</Text>
@@ -172,9 +172,8 @@ const home = () => {
                 <WeatherCard/>
               </ScrollView>
               </View>
-          </View>
-
-        
+          </View>  
+        } 
       </View>
     </SafeAreaView>
   )

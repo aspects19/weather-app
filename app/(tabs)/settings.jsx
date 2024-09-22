@@ -1,14 +1,15 @@
 import { View, Text, Image, TouchableOpacity, Linking } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { BlurView } from 'expo-blur';
+import { setItemAsync ,getItemAsync } from '../../components/asyncStorageReadWrite';
 import { FontAwesome, AntDesign, Octicons, Zocial, Ionicons, FontAwesome6, Feather } from '@expo/vector-icons';
 
 import icons from '../../constants/icons';
 
 const Settings = () => {
   const [notificationStatus, setNotificationStatus] = useState(false);
-  const [celcius, setCelcius] = useState(false);
+  const [celcius, setCelcius] = useState(true);
 
   const handleNotificationToggle = () => {
     setNotificationStatus(!notificationStatus);
@@ -16,7 +17,20 @@ const Settings = () => {
 
   const handleCelciusStatus = () => {
     setCelcius(!celcius);
+    setItemAsync("celcius", !celcius)
   };
+
+  useEffect(() => {
+    const loadCelciusStatus = async () => {
+      const storedCelcius = await getItemAsync('celcius');
+      if (storedCelcius !== null) {
+        setCelcius(storedCelcius);
+      }
+    };
+  
+    loadCelciusStatus(); 
+  }, []);
+  
 
   const SettingCard = ({ text, IconProvider, icon, toggle, onPress }) => {
     return (
