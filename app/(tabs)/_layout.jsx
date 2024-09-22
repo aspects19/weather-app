@@ -1,19 +1,20 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import { Tabs } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import Feather from '@expo/vector-icons/Feather';
 import { Ionicons } from '@expo/vector-icons';
 
 
-const TabIcon = ({ provider: IconComponent, icon, focused }) => {
+const TabIcon = ({ provider: IconComponent, icon, focused,name }) => {
   return (
-    <View className='flex items-center justify-center gap-2'>
+    <View className='flex items-center justify-center'>
       <IconComponent
         name={icon}
         size={24}
         color={focused ? 'white' : 'grey'}
       />
+      <Text className={focused ? 'text-white' : ' text-gray-400'}>{name}</Text>
     </View>
   );
 };
@@ -47,6 +48,7 @@ const RootLayout = () => {
                 provider={Feather} 
                 icon="home"
                 focused={focused}
+                name={"home"}
               />
             ),
           }}
@@ -60,6 +62,7 @@ const RootLayout = () => {
                 provider={Ionicons} 
                 icon="settings-outline"
                 focused={focused}
+                name={"settings"}
               />
             ),
           }}
