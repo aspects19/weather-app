@@ -1,18 +1,26 @@
-const getWeather= async (place) => {
+const getWeatherAndForecast = async (place) => {
   const apiKey = process.env.EXPO_PUBLIC_TOMORROW_API;
-  
-  const formatedLocation = place.replace(" ","_")
-  const url = `https://api.tomorrow.io/v4/weather/realtime?location=${formatedLocation}&apikey=${apiKey}`;
+  const formattedLocation = place.replace(" ", "_");
+
+  const weatherUrl = `https://api.tomorrow.io/v4/weather/realtime?location=${formattedLocation}&apikey=${apiKey}`;
+  const forecastUrl = `https://api.tomorrow.io/v4/weather/forecast?location=${formattedLocation}&apikey=${apiKey}`;
 
   try {
-    const WeatherRequestResponse = await fetch(url, {method: 'GET'});
+    const [weatherResponse, forecastResponse] = await Promise.all([
+      fetch(weatherUrl, { method: 'GET' }),
+      fetch(forecastUrl, { method: 'GET' })
+    ]);
 
-    if(!WeatherRequestResponse.ok) {
+    if (!weatherResponse.ok) {
       throw new Error("Failed to fetch weather data");
-    };
+    }
+    if (!forecastResponse.ok) {
+      throw new Error("Failed to fetch forecast data");
+    }
 
-    const weatherData = await WeatherRequestResponse.json();
-    
+    const weatherData = await weatherResponse.json();
+    const forecastData = await forecastResponse.json();
+
     const fullName = weatherData.location.name;
     const fullNameParts = fullName.split(",");
     const name = fullNameParts[0];
@@ -41,14 +49,27 @@ const getWeather= async (place) => {
       windSpeed,
     };
 
-    
-    return weatherInfo;
-    
+    const hourlyForecasts = [];
+    for (let i = 0; i < 8; i++) {
+      const hourlyData = forecastData.timelines.hourly[i];
+      const forecast = {
+        time: hourlyData.time,
+        temperature: hourlyData.values.temperature,
+        rainIntensity: hourlyData.values.rainIntensity,
+        cloudCover: hourlyData.values.cloudCover,
+        windSpeed: hourlyData.values.windSpeed
+      };
+      hourlyForecasts.push(forecast);
+    }
+
+    return {
+      weatherInfo,
+      hourlyForecasts
+    };
+
   } catch (error) {
-    throw error;
+    throw new Error("An unexpected fetching error occurred: " + error.message);
   }
+};
 
-}
-
-
-export default getWeather;
+export default { getWeatherAndForecast };
