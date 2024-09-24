@@ -5,6 +5,12 @@ const getWeatherAndForecast = async (place) => {
   const weatherUrl = `https://api.tomorrow.io/v4/weather/realtime?location=${formattedLocation}&apikey=${apiKey}`;
   const forecastUrl = `https://api.tomorrow.io/v4/weather/forecast?location=${formattedLocation}&apikey=${apiKey}`;
 
+  const formatTimeToEAT = (utcTime) => {
+    const date = new Date(utcTime);
+    date.setHours(date.getHours() + 3); 
+    return date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
+  };
+
   try {
     const [weatherResponse, forecastResponse] = await Promise.all([
       fetch(weatherUrl, { method: 'GET' }),
@@ -53,7 +59,7 @@ const getWeatherAndForecast = async (place) => {
     for (let i = 0; i < 8; i++) {
       const hourlyData = forecastData.timelines.hourly[i];
       const forecast = {
-        time: hourlyData.time,
+        time: index===0 ? "Now" : formatTimeToEAT(hourlyData.time),
         temperature: hourlyData.values.temperature,
         rainIntensity: hourlyData.values.rainIntensity,
         cloudCover: hourlyData.values.cloudCover,
@@ -68,7 +74,7 @@ const getWeatherAndForecast = async (place) => {
     };
 
   } catch (error) {
-    throw new Error("An unexpected fetching error occurred: " + error.message);
+    throw new Error("An unexpected fetching error occurred: " );
   }
 };
 
