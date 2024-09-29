@@ -1,9 +1,10 @@
 import { View, TextInput, Text, Image, ScrollView, BackHandler, Modal, TouchableOpacity} from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { BlurView } from 'expo-blur';
 import { StatusBar } from 'expo-status-bar';
-import getWeather from '../../components/getWeather';
+import getWeatherAndForecast from '../../components/getWeather';
+import { setItemAsync, getItemAsync } from '../../components/asyncStorageReadWrite';
 import HomeSkeleton from '../../components/skeleton';
 import {
   FontAwesome,
@@ -17,25 +18,12 @@ import icons from '../../constants/icons';
 import CustomAlert from '../../components/customAlert';
 
 
-
 const home = () => {
   const [location, setLocation] = useState("");
-  const [weatherDataInfo, setWeatherDataInfo] = useState({
-      name: null,
-      country: null,
-      cloudCover: null,
-      humidity: null,
-      precipitationProbability: null,
-      pressure: null,
-      rainIntensity: null,
-      temperature : null,
-      visibility: null,
-      windDirection: null,
-      windSpeed: null,
-    }
-  );
-  const [ isloading, setIsLoading] = useState(true);
-
+  const [weatherDataInfo, setWeatherDataInfo] = useState(null);
+  const [FocastDataInfo, setFocastDataInfo] = useState(null);
+  const [ isloading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
   
 
   const handleOnSubmitEditing = async () => {
@@ -43,23 +31,17 @@ const home = () => {
     setIsLoading(true);
     setLocation("");
     try {
-      const WeatherData = await getWeather(location);
-      if (WeatherData) {
-        setWeatherDataInfo({
-          name: WeatherData.name,
-          country: WeatherData.country,
-          cloudCover: WeatherData.cloudCover,
-          humidity: WeatherData.humidity,
-          precipitationProbability: WeatherData.precipitationProbability,
-          pressure: WeatherData.pressure,
-          rainIntensity: WeatherData.rainIntensity,
-          temperature : WeatherData.temperature,
-          visibility: WeatherData.visibility,
-          windDirection: WeatherData.windDirection,
-          windSpeed: WeatherData.windSpeed,
-        });
+      const {weatherInfo, hourlyForecasts} = await getWeatherAndForecast(location);
+      
+      if (weatherInfo && hourlyForecasts) {
+        setWeatherDataInfo(weatherInfo);
+        setFocastDataInfo(hourlyForecasts);
+        setIsLoading(false);
+        setItemAsync("weatherInfo", weatherInfo);
+        setItemAsync("hourlyForecasts", hourlyForecasts)
       };
     } catch (error) {
+      setIsLoading(false)
       return (
         <CustomAlert 
           title={"⚠️ Error"}
@@ -69,6 +51,18 @@ const home = () => {
     };
       
   };
+
+  useEffect(() => {
+    const loadStoredWeatherData = async() => {
+      const storedRealtimeData = await getItemAsync("WeatherInfo");
+      const storedFocastData = await getItemAsync("hourlyFocasts");
+      if (storedRealtimeData != null && storedFocastData != null) {
+        setFocastDataInfo(storedRealtimeData);
+        setFocastDataInfo(FocastDataInfo);
+      }
+      loadStoredWeatherData();
+    }
+  }, [])
 
   const SearchModal = () => {
     const [visible, setVisible] = useState(true);
@@ -138,12 +132,13 @@ const home = () => {
     <SafeAreaView>
       <StatusBar backgroundColor="#161622" style="light" />
       <View className='h-full bg-primary pl-2'>
-        { weatherDataInfo.name===null ? 
-        <>
-           <HomeSkeleton/>
-           <SearchModal />
-        </>
-        : (isloading ? <Skeleton/> :
+        { isloading ? <HomeSkeleton/> : (
+            weatherDataInfo===null ? 
+            <>
+              <HomeSkeleton/>
+              <SearchModal />
+            </>
+            :
             <View>
               <View className='w-full '>
                 
@@ -176,36 +171,36 @@ const home = () => {
                     </View>
                     <FontAwesome name="calendar" size={19} color="white" />
                   </View>
-                  <Text className="text-white font-semibold text-xl py-4 pt-8">Wendani, <Text className="font-normal">Nairobi</Text></Text>
+                  <Text className="text-white font-semibold text-xl py-4 pt-8">{weatherDataInfo.name}<Text className="font-normal">{weatherDataInfo.country}</Text></Text>
                   <Image source={icons.clearNight} resizeMode="contain" className="h-48 w-48" />
-                  <Text className="font-extrabold text-white text-[37px] pt-3">29°C</Text>
+                  <Text className="font-extrabold text-white text-[37px] pt-3">{weatherDataInfo.temperature}</Text>
                   <Text className="font-normal text-white text-lg">Expecting some light rain today.</Text>
                   <View className="flex flex-row justify-between w-full px-8 mb-3 pt-7">
                     <View className="flex flex-row items-center">
                       <Feather name="wind" size={24} color="white" />
-                      <Text className="text-white pl-2">11km/hr</Text>
+                      <Text className="text-white pl-2">{weatherDataInfo.windSpeed}</Text>
                     </View>
                     <View className="flex flex-row items-center">
                       <Ionicons name="water-outline" size={24} color="white" />
-                      <Text className="text-white pl-2">02%</Text>
+                      <Text className="text-white pl-2">{weatherDataInfo.humidity}</Text>
                     </View>
                     <View className="flex flex-row items-center">
                       <Fontisto name="day-sunny" size={24} color="white" />
-                      <Text className="text-white pl-2">8hr</Text>
+                      <Text className="text-white pl-2">{weatherDataInfo.cloudCover}</Text>
                     </View>
                   </View>
                   <View className="flex flex-row justify-between w-full px-8 pb-6 pt-2">
                     <View className="flex flex-row items-center">
                       <Ionicons name="rainy-outline" size={24} color="white" /> 
-                      <Text className="text-white pl-2">11</Text>
+                      <Text className="text-white pl-2">{weatherDataInfo.rainIntensity}</Text>
                     </View>
                     <View className="flex flex-row items-center">
                       <AntDesign name="cloudo" size={24} color="white" />
-                      <Text className="text-white pl-2">02%</Text>
+                      <Text className="text-white pl-2">{weatherDataInfo.cloudCover}</Text>
                     </View>
                     <View className="flex flex-row items-center">
                       <Fontisto name="fog" size={18} color="white" />
-                      <Text className="text-white pl-2">20</Text>
+                      <Text className="text-white pl-2">{weatherDataInfo.visibility}</Text>
                     </View>
                   </View>
                 </View>
@@ -215,20 +210,17 @@ const home = () => {
               <View>
                 <Text className='text-white text-xl pt-3 font-semibold pl-2'>🕜 Hourly Forecast</Text>
                 <ScrollView horizontal={true} className='pb-5 pl-1 '>
-                  {hourlyData.map((hour, index) => {
-                    const time = new Date(hour.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-                    const temperature = Math.round(hour.values.temperature);
-                    const weatherIcon = weatherCodeToIcon(hour.values.weatherCode);
-                    return(
-                      <WeatherCard 
-                        key={index}
-                        time={time}
-                        temperature={temperature}
-                        icon={weatherIcon}
-                      />
-                    )
-
-                  })
+                  {
+                  FocastDataInfo.map((hour, index) => {
+                   return(
+                     <WeatherCard 
+                       key={index}
+                       time={hour.time}
+                       temperature={hour.temperature}
+                       icon={hour.weatherIcon}
+                     />
+                   )
+                 })
                   }
                 </ScrollView>
                 </View>
