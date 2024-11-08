@@ -1,1 +1,1 @@
-curl --request GET --url 'https://api.tomorrow.io/v4/weather/realtime?location=Kahawa_wendani&apikey=QBWkkKjIw8LXWIpn2SAjRF28gQKbud3f' 
+curl --request GET --url 'https://api.tomorrow.io/v4/weather/forecast?location=Kahawa_wendani&apikey=QBWkkKjIw8LXWIpn2SAjRF28gQKbud3f' -o data.json

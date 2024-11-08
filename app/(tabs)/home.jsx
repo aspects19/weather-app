@@ -1,5 +1,5 @@
-import { View, TextInput, Text, Image, ScrollView, BackHandler, Modal, TouchableOpacity} from 'react-native';
-import React, { useState, useEffect } from 'react';
+import { View, TextInput, Text, Image, ScrollView, TouchableOpacity, KeyboardAvoidingView} from 'react-native';
+import React, { useState, useEffect, useCallback } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { BlurView } from 'expo-blur';
 import { StatusBar } from 'expo-status-bar';
@@ -14,9 +14,7 @@ import {
   AntDesign,
   } from '@expo/vector-icons';
 
-import icons from '../../constants/icons'; 
 import CustomAlert from '../../components/customAlert';
-
 
 const home = () => {
   const [location, setLocation] = useState("");
@@ -25,33 +23,6 @@ const home = () => {
   const [ isloading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   
-
-  const handleOnSubmitEditing = async () => {
-    if (!location) return;
-    setIsLoading(true);
-    setLocation("");
-    try {
-      const {weatherInfo, hourlyForecasts} = await getWeatherAndForecast(location);
-      
-      if (weatherInfo && hourlyForecasts) {
-        setWeatherDataInfo(weatherInfo);
-        setFocastDataInfo(hourlyForecasts);
-        setIsLoading(false);
-        setItemAsync("weatherInfo", weatherInfo);
-        setItemAsync("hourlyForecasts", hourlyForecasts)
-      };
-    } catch (error) {
-      setIsLoading(false)
-      return (
-        <CustomAlert 
-          title={"⚠️ Error"}
-          text={"An error occured and we were unable to fetch weather info."}
-        />  
-      )
-    };
-      
-  };
-
   useEffect(() => {
     const loadStoredWeatherData = async() => {
       const storedRealtimeData = await getItemAsync("WeatherInfo");
@@ -64,56 +35,74 @@ const home = () => {
     }
   }, [])
 
-  const SearchModal = () => {
-    const [visible, setVisible] = useState(true);
 
-    const dismissCallback = () => {
-      BackHandler.exitApp();
-      setVisible(false);
+  const handleOnSubmitEditing = async () => {
+    if (!location) return console.log("No location");
+    setIsLoading(true);
+    setLocation("");
+    try {
+      const {weatherInfo, hourlyForecasts} = await getWeatherAndForecast(location);
+      if (weatherInfo && hourlyForecasts) {
+        setWeatherDataInfo(weatherInfo);
+        setFocastDataInfo(hourlyForecasts);
+        setIsLoading(false);
+        setItemAsync("weatherInfo", weatherInfo);
+        console.log("Set Weather info to local storage");
+        
+        setItemAsync("hourlyForecasts", hourlyForecasts)
+        console.log("Set focast info to local storage");
+
+      } else {
+        console.log("No data info");
+        
+      }
+
+    } catch (error) {
+      setIsLoading(false)
+      console.log(`got an error from api call ${error}`);
     };
+      
+  };
+
+  const SearchModal = () => {
+    
+    
     return (
-      <Modal 
-        animationType='fade'
-        transparent={true}
-        visible={visible}
-        onRequestClose={dismissCallback}
-      >
-        <View className='flex-1 justify-center items-center bg-[#0000007e]'>
-          <View className='m-5 bg-[#575757] rounded-xl p-3 items-center w-9/12 h-44 flex justify-between py-5'>
-            <Text className='text-lg font-bold text-white mb-2 pl-2'>Type a location</Text>
-            <View className="relative w-full">
-              <TextInput
-                onChangeText={(textchange) => setLocation(textchange)} 
-                onSubmitEditing={handleOnSubmitEditing} 
-                value={location}
-                placeholder="Type your location"
-                placeholderTextColor={"#333941"}
-                cursorColor={"grey"}
-                className="h-8 w-full bg-[#c1c3c5] rounded-lg pl-3 pr-10"
-              />
-              <Feather
-                name="search"
-                size={20}
-                color="black"
-                style={{
-                  position: "absolute",
-                  right: 9,
-                  top: "50%",
-                  transform: [{ translateY: -12 }],
-                }}
-              />
-            </View>
-            <View className='flex flex-row justify-around w-full mt-4'>
-              <TouchableOpacity className='rounded-xl p-3 bg-[#413c30] ' onPress={dismissCallback}>
-                <Text className='text-white font-bold text-center'>Dismiss</Text>
-              </TouchableOpacity>
-              <TouchableOpacity className='rounded-xl p-3 bg-[#725b1c] ' onPress={handleOnSubmitEditing}>
-                <Text className='text-white font-bold text-center'>Search</Text>
-              </TouchableOpacity>
-            </View>
+      <View className='absolute top-0 left-0 right-0 bottom-0 justify-center items-center '>
+        <View className='mx-5  bg-[#575757] rounded-xl p-3 items-center w-9/12 h-44 flex justify-between py-5'>
+          <Text className='text-lg font-bold text-white mb-2 pl-2'>Type a location</Text>
+          <View className=" w-full">
+            <TextInput
+               onChangeText={setLocation} 
+              onSubmitEditing={handleOnSubmitEditing} 
+              value={location}
+              placeholder="Type your location"
+              placeholderTextColor={"#333941"}
+              cursorColor={"grey"}
+              className="h-8 w-full bg-[#c1c3c5] rounded-lg pl-3 pr-10"
+            />
+            <Feather
+              name="search"
+              size={20}
+              color="black"
+              style={{
+                position: "absolute",
+                right: 9,
+                top: "50%",
+                transform: [{ translateY: -12 }],
+              }}
+            />
+          </View>
+          <View className='flex flex-row justify-around w-full mt-4'>
+            <TouchableOpacity className='rounded-xl p-3 bg-[#413c30] '>
+              <Text className='text-white font-bold text-center'>Dismiss</Text>
+            </TouchableOpacity>
+            <TouchableOpacity className='rounded-xl p-3 bg-[#725b1c] ' onPress={handleOnSubmitEditing}>
+              <Text className='text-white font-bold text-center'>Search</Text>
+            </TouchableOpacity>
           </View>
         </View>
-      </Modal>
+      </View>
     );
   };
 
@@ -134,10 +123,10 @@ const home = () => {
       <View className='h-full bg-primary pl-2'>
         { isloading ? <HomeSkeleton/> : (
             weatherDataInfo===null ? 
-            <>
+            <View className='flex-1 relative'>
               <HomeSkeleton/>
               <SearchModal />
-            </>
+            </View>
             :
             <View>
               <View className='w-full '>
@@ -172,13 +161,13 @@ const home = () => {
                     <FontAwesome name="calendar" size={19} color="white" />
                   </View>
                   <Text className="text-white font-semibold text-xl py-4 pt-8">{weatherDataInfo.name}<Text className="font-normal">{weatherDataInfo.country}</Text></Text>
-                  <Image source={icons.clearNight} resizeMode="contain" className="h-48 w-48" />
-                  <Text className="font-extrabold text-white text-[37px] pt-3">{weatherDataInfo.temperature}</Text>
+                  <Image source={weatherDataInfo.icon} resizeMode="contain" className="h-48 w-48" />
+                  <Text className="font-extrabold text-white text-[37px] pt-3">{weatherDataInfo.temperature} </Text>
                   <Text className="font-normal text-white text-lg">Expecting some light rain today.</Text>
                   <View className="flex flex-row justify-between w-full px-8 mb-3 pt-7">
                     <View className="flex flex-row items-center">
                       <Feather name="wind" size={24} color="white" />
-                      <Text className="text-white pl-2">{weatherDataInfo.windSpeed}</Text>
+                      <Text className="text-white pl-2">{weatherDataInfo.windSpeed} km/h</Text>
                     </View>
                     <View className="flex flex-row items-center">
                       <Ionicons name="water-outline" size={24} color="white" />
@@ -186,21 +175,21 @@ const home = () => {
                     </View>
                     <View className="flex flex-row items-center">
                       <Fontisto name="day-sunny" size={24} color="white" />
-                      <Text className="text-white pl-2">{weatherDataInfo.cloudCover}</Text>
+                      <Text className="text-white pl-2">{weatherDataInfo.cloudCover} %</Text>
                     </View>
                   </View>
                   <View className="flex flex-row justify-between w-full px-8 pb-6 pt-2">
                     <View className="flex flex-row items-center">
                       <Ionicons name="rainy-outline" size={24} color="white" /> 
-                      <Text className="text-white pl-2">{weatherDataInfo.rainIntensity}</Text>
+                      <Text className="text-white pl-2">{weatherDataInfo.rainIntensity} mm/h</Text>
                     </View>
                     <View className="flex flex-row items-center">
                       <AntDesign name="cloudo" size={24} color="white" />
-                      <Text className="text-white pl-2">{weatherDataInfo.cloudCover}</Text>
+                      <Text className="text-white pl-2">{weatherDataInfo.cloudCover} %</Text>
                     </View>
                     <View className="flex flex-row items-center">
                       <Fontisto name="fog" size={18} color="white" />
-                      <Text className="text-white pl-2">{weatherDataInfo.visibility}</Text>
+                      <Text className="text-white pl-2">{weatherDataInfo.visibility} %</Text>
                     </View>
                   </View>
                 </View>
@@ -217,7 +206,7 @@ const home = () => {
                        key={index}
                        time={hour.time}
                        temperature={hour.temperature}
-                       icon={hour.weatherIcon}
+                       icon={hour.icon}
                      />
                    )
                  })

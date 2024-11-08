@@ -25,6 +25,7 @@ const RootLayout = () => {
     < View className= 'h-full bg-primary'>
       <Tabs
         screenOptions={{
+          tabBarHideOnKeyboard: true,
           tabBarShowLabel: false,
           tabBarStyle: {
             backgroundColor: "#1d1f29",
@@ -35,8 +36,9 @@ const RootLayout = () => {
             marginTop: 7,
             marginHorizontal:16,
             borderRadius: 20,
-            paddingHorizontal: 10
+            paddingHorizontal: 10,
           },
+          
         }}
       >
         <Tabs.Screen
