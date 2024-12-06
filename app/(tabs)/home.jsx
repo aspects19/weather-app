@@ -31,8 +31,9 @@ const home = () => {
         setFocastDataInfo(storedRealtimeData);
         setFocastDataInfo(FocastDataInfo);
       }
-      loadStoredWeatherData();
-    }
+    };
+    
+    loadStoredWeatherData();
   }, [])
 
 
