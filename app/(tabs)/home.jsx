@@ -1,5 +1,5 @@
 import { View, TextInput, Text, Image, ScrollView, TouchableOpacity, KeyboardAvoidingView} from 'react-native';
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { BlurView } from 'expo-blur';
 import { StatusBar } from 'expo-status-bar';
@@ -35,11 +35,14 @@ const home = () => {
     }
   }, [])
 
+  //testing if location is being updated correctly
+  useEffect(() => {
+    console.log(location)
+  }, [location])
 
-  const handleOnSubmitEditing = async () => {
-    if (!location) return console.log("No location");
+  const handleOnSubmitEditing = async (location) => {
+    if (!location) return console.log("No location", location);
     setIsLoading(true);
-    setLocation("");
     try {
       const {weatherInfo, hourlyForecasts} = await getWeatherAndForecast(location);
       if (weatherInfo && hourlyForecasts) {
@@ -64,48 +67,6 @@ const home = () => {
       
   };
 
-  const SearchModal = () => {
-    
-    
-    return (
-      <View className='absolute top-0 left-0 right-0 bottom-0 justify-center items-center '>
-        <View className='mx-5  bg-[#575757] rounded-xl p-3 items-center w-9/12 h-44 flex justify-between py-5'>
-          <Text className='text-lg font-bold text-white mb-2 pl-2'>Type a location</Text>
-          <View className=" w-full">
-            <TextInput
-               onChangeText={setLocation} 
-              onSubmitEditing={handleOnSubmitEditing} 
-              value={location}
-              placeholder="Type your location"
-              placeholderTextColor={"#333941"}
-              cursorColor={"grey"}
-              className="h-8 w-full bg-[#c1c3c5] rounded-lg pl-3 pr-10"
-            />
-            <Feather
-              name="search"
-              size={20}
-              color="black"
-              style={{
-                position: "absolute",
-                right: 9,
-                top: "50%",
-                transform: [{ translateY: -12 }],
-              }}
-            />
-          </View>
-          <View className='flex flex-row justify-around w-full mt-4'>
-            <TouchableOpacity className='rounded-xl p-3 bg-[#413c30] '>
-              <Text className='text-white font-bold text-center'>Dismiss</Text>
-            </TouchableOpacity>
-            <TouchableOpacity className='rounded-xl p-3 bg-[#725b1c] ' onPress={handleOnSubmitEditing}>
-              <Text className='text-white font-bold text-center'>Search</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
-    );
-  };
-
   const WeatherCard = ({time, temperature, icon}) => {
     return (
       <BlurView 
@@ -125,7 +86,7 @@ const home = () => {
             weatherDataInfo===null ? 
             <View className='flex-1 relative'>
               <HomeSkeleton/>
-              <SearchModal />
+              <SearchModal locationUpdater={setLocation} onSubmit={handleOnSubmitEditing}/>
             </View>
             :
             <View>
@@ -138,7 +99,7 @@ const home = () => {
                       <View className="relative w-full">
                         <TextInput
                           onChangeText={(textchange) => setLocation(textchange)} 
-                          onSubmitEditing={handleOnSubmitEditing} 
+                          onSubmitEditing={handleOnSubmitEditing(location)} 
                           value={location}
                           placeholder="Type your location"
                           placeholderTextColor={"#333941"}
@@ -219,6 +180,54 @@ const home = () => {
       </View>
     </SafeAreaView>
   )
+};
+
+const SearchModal = ({locationUpdater, onSubmit, ...rest}) => {
+  const [localLocation, setLocalLocation] = useState("");
+  
+  const handleLocalOnSubmit = (inputLocation) => {
+    locationUpdater(inputLocation);
+    setLocalLocation("");
+    onSubmit(inputLocation);
+  };
+  
+  return (
+    <View className='absolute top-0 left-0 right-0 bottom-0 justify-center items-center '>
+      <View className='mx-5  bg-[#575757] rounded-xl p-3 items-center w-9/12 h-44 flex justify-between py-5'>
+        <Text className='text-lg font-bold text-white mb-2 pl-2'>Type a location</Text>
+        <View className=" w-full">
+          <TextInput
+             onChangeText={setLocalLocation} 
+            onSubmitEditing= {()=>handleLocalOnSubmit(localLocation)} 
+            value={localLocation}
+            placeholder="Type your location"
+            placeholderTextColor={"#333941"}
+            cursorColor={"grey"}
+            className="h-8 w-full bg-[#c1c3c5] rounded-lg pl-3 pr-10"
+          />
+          <Feather
+            name="search"
+            size={20}
+            color="black"
+            style={{
+              position: "absolute",
+              right: 9,
+              top: "50%",
+              transform: [{ translateY: -12 }],
+            }}
+          />
+        </View>
+        <View className='flex flex-row justify-around w-full mt-4'>
+          <TouchableOpacity className='rounded-xl p-3 bg-[#413c30] '>
+            <Text className='text-white font-bold text-center'>Dismiss</Text>
+          </TouchableOpacity>
+          <TouchableOpacity className='rounded-xl p-3 bg-[#725b1c] ' onPress={() =>handleLocalOnSubmit(localLocation)}>
+            <Text className='text-white font-bold text-center'>Search</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </View>
+  );
 };
 
 export default home
