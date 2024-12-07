@@ -2,7 +2,7 @@ import getWeatherIcon from "./getWeatherIcon";
 import icons from "../constants/icons";
 
 const getWeatherAndForecast = async (place) => {
-  // const apiKey = "QBWkkKjIw8LXWIpn2SAjRF28gQKbud3f"
+  // const apiKey = process.env.EXPO_PUBLIC_TOMORROW_API
   // const formattedLocation = place.trim().replace(" ", "_");
 
   // const weatherUrl = `https://api.tomorrow.io/v4/weather/realtime?location=${formattedLocation}&apikey=${apiKey}`;
@@ -67,7 +67,6 @@ const getWeatherAndForecast = async (place) => {
     //   }
     // };
     
-
     const hourlyForecasts = [
       {
         time: "Now",
@@ -106,19 +105,19 @@ const getWeatherAndForecast = async (place) => {
       },
     ];
     
-    // for (let i = 0; i < 8; i++) {
-    //   const hourlyData = forecastData.timelines.hourly[i];
-    //   const forecast = {
-    //     time: i === 0 ? "Now" : formatTimeToEAT(hourlyData.time),
-    //     rainIntensity: hourlyData.values.rainIntensity,
-    //     cloudCover: hourlyData.values.cloudCover,
-    //     windSpeed: hourlyData.values.windSpeed,
-    //     icon: mapForecastToIcon(hourlyData.values),
-    //   };
+    for (let i = 0; i < 8; i++) {
+      const hourlyData = forecastData.timelines.hourly[i];
+      const forecast = {
+        time: i === 0 ? "Now" : formatTimeToEAT(hourlyData.time),
+        rainIntensity: hourlyData.values.rainIntensity,
+        cloudCover: hourlyData.values.cloudCover,
+        windSpeed: hourlyData.values.windSpeed,
+        icon: mapForecastToIcon(hourlyData.values),
+      };
       
       
-    //   hourlyForecasts.push(forecast);
-    // }
+      hourlyForecasts.push(forecast);
+    }
     
     return {
       weatherInfo,
