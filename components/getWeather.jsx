@@ -105,19 +105,19 @@ const getWeatherAndForecast = async (place) => {
       },
     ];
     
-    for (let i = 0; i < 8; i++) {
-      const hourlyData = forecastData.timelines.hourly[i];
-      const forecast = {
-        time: i === 0 ? "Now" : formatTimeToEAT(hourlyData.time),
-        rainIntensity: hourlyData.values.rainIntensity,
-        cloudCover: hourlyData.values.cloudCover,
-        windSpeed: hourlyData.values.windSpeed,
-        icon: mapForecastToIcon(hourlyData.values),
-      };
+    // for (let i = 0; i < 8; i++) {
+    //   const hourlyData = forecastData.timelines.hourly[i];
+    //   const forecast = {
+    //     time: i === 0 ? "Now" : formatTimeToEAT(hourlyData.time),
+    //     rainIntensity: hourlyData.values.rainIntensity,
+    //     cloudCover: hourlyData.values.cloudCover,
+    //     windSpeed: hourlyData.values.windSpeed,
+    //     icon: mapForecastToIcon(hourlyData.values),
+    //   };
       
       
-      hourlyForecasts.push(forecast);
-    }
+    //   hourlyForecasts.push(forecast);
+    // }
     
     return {
       weatherInfo,
