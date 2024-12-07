@@ -6,6 +6,7 @@ import { StatusBar } from 'expo-status-bar';
 import getWeatherAndForecast from '../../components/getWeather';
 import { setItemAsync, getItemAsync } from '../../components/asyncStorageReadWrite';
 import HomeSkeleton from '../../components/skeleton';
+import {useTemperature } from "../../context/tempContext";
 import {
   FontAwesome,
   Fontisto,
@@ -22,7 +23,9 @@ const home = () => {
   const [FocastDataInfo, setFocastDataInfo] = useState(null);
   const [ isloading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
-  
+
+  const {isCelcius} = useTemperature();
+
   useEffect(() => {
     const loadStoredWeatherData = async() => {
       const storedRealtimeData = await getItemAsync("WeatherInfo");
@@ -35,11 +38,6 @@ const home = () => {
     
     loadStoredWeatherData();
   }, [])
-
-  //testing if location is being updated correctly
-  useEffect(() => {
-    console.log(location)
-  }, [location])
 
   const handleOnSubmitEditing = async (location) => {
     if (!location) return console.log("No location", location);
@@ -74,7 +72,7 @@ const home = () => {
         intensity={80} tint='dark' className='flex items-center rounded-lg overflow-hidden h-32 w-24 mt-4 mr-3 py-4 bg-[#4c558679]'>
         <Image resizeMode='contain' source={icon} className='h-12 w-12'/>
         <Text className='text-white text-lg pt-1'>{time}</Text>
-        <Text className='text-white text-xl font-semibold'>{temperature}</Text>
+        <Text className='text-white text-xl font-semibold'>{isCelcius ? `${temperature} °C` : `${temperature*(9/5)} °F`}</Text>
       </BlurView>
     )
   };
@@ -122,9 +120,9 @@ const home = () => {
                     </View>
                     <FontAwesome name="calendar" size={19} color="white" />
                   </View>
-                  <Text className="text-white font-semibold text-xl py-4 pt-8">{weatherDataInfo.name}<Text className="font-normal">{weatherDataInfo.country}</Text></Text>
+                  <Text className="text-white font-semibold text-xl py-4 pt-8">{weatherDataInfo.name} <Text className="font-normal">{weatherDataInfo.country}</Text></Text>
                   <Image source={weatherDataInfo.icon} resizeMode="contain" className="h-48 w-48" />
-                  <Text className="font-extrabold text-white text-[37px] pt-3">{weatherDataInfo.temperature} </Text>
+                  <Text className="font-extrabold text-white text-[37px] pt-3">{isCelcius ? `${weatherDataInfo.temperature} °C` : `${weatherDataInfo.temperature*(9/5)} °F`} </Text>
                   <Text className="font-normal text-white text-lg">Expecting some light rain today.</Text>
                   <View className="flex flex-row justify-between w-full px-8 mb-3 pt-7">
                     <View className="flex flex-row items-center">

@@ -44,6 +44,7 @@ const getWeatherAndForecast = async (place) => {
 
       const weatherInfo = {
         name: place,
+        temperature: 25,
         country: "Kenya",
         cloudCover: 50,
         humidity: 50,
@@ -70,6 +71,7 @@ const getWeatherAndForecast = async (place) => {
     const hourlyForecasts = [
       {
         time: "Now",
+        temperature: 43,
         rainIntensity: 40,
         cloudCover: 44,
         windSpeed: 77,
@@ -77,6 +79,7 @@ const getWeatherAndForecast = async (place) => {
       },
       {
         time: "8.00",
+        temperature: 30,
         rainIntensity: 40,
         cloudCover: 44,
         windSpeed: 77,
@@ -84,6 +87,7 @@ const getWeatherAndForecast = async (place) => {
       },
       {
         time: "9.00",
+        temperature: 3,
         rainIntensity: 40,
         cloudCover: 44,
         windSpeed: 77,
@@ -91,6 +95,7 @@ const getWeatherAndForecast = async (place) => {
       },
       {
         time: "10.00",
+        temperature: 20,
         rainIntensity: 40,
         cloudCover: 44,
         windSpeed: 77,
@@ -98,6 +103,7 @@ const getWeatherAndForecast = async (place) => {
       },
       {
         time: "11.00",
+        temperature: 80,
         rainIntensity: 40,
         cloudCover: 44,
         windSpeed: 77,

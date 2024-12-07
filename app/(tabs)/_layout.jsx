@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { Tabs } from 'expo-router';
+import { TemperatureProvider } from '../../context/tempContext';
 import { StatusBar } from 'expo-status-bar';
 import Feather from '@expo/vector-icons/Feather';
 import { Ionicons } from '@expo/vector-icons';
@@ -23,55 +24,56 @@ const TabIcon = ({ provider: IconComponent, icon, focused,name }) => {
 const RootLayout = () => {
   return (
     < View className= 'h-full bg-primary'>
-      <Tabs
-        screenOptions={{
-          tabBarHideOnKeyboard: true,
-          tabBarShowLabel: false,
-          tabBarStyle: {
-            backgroundColor: "#1d1f29",
-            borderTopWidth: 1,
-            borderTopColor: "#232533",
-            height: 50,
-            marginBottom: 16,
-            marginTop: 7,
-            marginHorizontal:16,
-            borderRadius: 20,
-            paddingHorizontal: 10,
-          },
+      <TemperatureProvider>
+        <Tabs
+          screenOptions={{
+            tabBarHideOnKeyboard: true,
+            tabBarShowLabel: false,
+            tabBarStyle: {
+              backgroundColor: "#1d1f29",
+              borderTopWidth: 1,
+              borderTopColor: "#232533",
+              height: 50,
+              marginBottom: 16,
+              marginTop: 7,
+              marginHorizontal:16,
+              borderRadius: 20,
+              paddingHorizontal: 10,
+            },
+            
+          }}
+        >
+          <Tabs.Screen
+            name="home"
+            options={{
+              headerShown: false,
+              tabBarIcon: ({ focused }) => (
+                <TabIcon
+                  provider={Feather} 
+                  icon="home"
+                  focused={focused}
+                  name={"home"}
+                />
+              ),
+            }}
+          />
+          <Tabs.Screen
+            name="settings"
+            options={{
+              headerShown: false,
+              tabBarIcon: ({ focused }) => (
+                <TabIcon
+                  provider={Ionicons} 
+                  icon="settings-outline"
+                  focused={focused}
+                  name={"settings"}
+                />
+              ),
+            }}
+          />
           
-        }}
-      >
-        <Tabs.Screen
-          name="home"
-          options={{
-            headerShown: false,
-            tabBarIcon: ({ focused }) => (
-              <TabIcon
-                provider={Feather} 
-                icon="home"
-                focused={focused}
-                name={"home"}
-              />
-            ),
-          }}
-        />
-        <Tabs.Screen
-          name="settings"
-          options={{
-            headerShown: false,
-            tabBarIcon: ({ focused }) => (
-              <TabIcon
-                provider={Ionicons} 
-                icon="settings-outline"
-                focused={focused}
-                name={"settings"}
-              />
-            ),
-          }}
-        />
-        
-      </Tabs>
-
+        </Tabs>
+      </TemperatureProvider>
       <StatusBar backgroundColor="#161622" style="light"  />
     </View>
   );
