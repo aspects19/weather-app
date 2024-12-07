@@ -4,27 +4,28 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { BlurView } from 'expo-blur';
 import { setItemAsync ,getItemAsync } from '../../components/asyncStorageReadWrite';
 import { FontAwesome, AntDesign, Octicons, Zocial, Ionicons, FontAwesome6, Feather } from '@expo/vector-icons';
+import { useTemperature } from '../../context/tempContext';
 
 import icons from '../../constants/icons';
 
 const Settings = () => {
   const [notificationStatus, setNotificationStatus] = useState(false);
-  const [celcius, setCelcius] = useState(true);
+  const {isCelcius, setIsCelcius} = useTemperature();
 
   const handleNotificationToggle = () => {
     setNotificationStatus(!notificationStatus);
   };
 
   const handleCelciusStatus = () => {
-    setCelcius(!celcius);
-    setItemAsync("celcius", !celcius)
+    setIsCelcius(!isCelcius);
+    setItemAsync("celcius", !isCelcius)
   };
 
   useEffect(() => {
     const loadCelciusStatus = async () => {
       const storedCelcius = await getItemAsync('celcius');
       if (storedCelcius !== null) {
-        setCelcius(storedCelcius);
+        setIsCelcius(storedCelcius);
       }
     };
   
@@ -81,7 +82,7 @@ const Settings = () => {
 
           <View className="mt-3">
             <SettingCard IconProvider={FontAwesome} icon="bell-o" text="Turn on notification" toggle={notificationStatus}onPress={handleNotificationToggle} />
-            <SettingCard IconProvider={FontAwesome6} icon="temperature-low" text="Use degrees Celcius" toggle={celcius} onPress={handleCelciusStatus} />
+            <SettingCard IconProvider={FontAwesome6} icon="temperature-low" text="Use degrees Celcius" toggle={isCelcius} onPress={handleCelciusStatus} />
             <SettingCard IconProvider={Ionicons} icon="share-social" text="Tell your friends?" onPress={()=>Linking.openURL("https://drive.google.com")}/>
             <SettingCard IconProvider={Octicons} icon="repo" text="Project repo" onPress={()=>Linking.openURL("https://github.com/aspects19/weather-app")} />
 
