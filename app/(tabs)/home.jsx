@@ -99,7 +99,7 @@ const home = () => {
                       <View className="relative w-full">
                         <TextInput
                           onChangeText={(textchange) => setLocation(textchange)} 
-                          onSubmitEditing={handleOnSubmitEditing(location)} 
+                          onSubmitEditing={()=>handleOnSubmitEditing(location)} 
                           value={location}
                           placeholder="Type your location"
                           placeholderTextColor={"#333941"}
