@@ -56,7 +56,7 @@ const home = () => {
 
       } else {
         console.log("No data info");
-        
+
       }
 
     } catch (error) {
@@ -120,8 +120,8 @@ const home = () => {
                     </View>
                     <FontAwesome name="calendar" size={19} color="white" />
                   </View>
-                  <Text className="text-white font-semibold text-xl py-4 pt-8">{weatherDataInfo.name} <Text className="font-normal">{weatherDataInfo.country}</Text></Text>
-                  <Image source={weatherDataInfo.icon} resizeMode="contain" className="h-48 w-48" />
+                  <Text className="text-white font-semibold text-xl pt-8">{weatherDataInfo.name}, <Text className="font-normal">{weatherDataInfo.country}</Text></Text>
+                  <Image source={weatherDataInfo.icon} resizeMode="contain" className="h-44 w-48" />
                   <Text className="font-extrabold text-white text-[37px] pt-3">{isCelcius ? `${weatherDataInfo.temperature} °C` : `${weatherDataInfo.temperature*(9/5)} °F`} </Text>
                   <Text className="font-normal text-white text-lg">Expecting some light rain today.</Text>
                   <View className="flex flex-row justify-between w-full px-8 mb-3 pt-7">
@@ -158,7 +158,7 @@ const home = () => {
               </View>
               <View>
                 <Text className='text-white text-xl pt-3 font-semibold pl-2'>🕜 Hourly Forecast</Text>
-                <ScrollView horizontal={true} className='pb-5 pl-1 '>
+                <ScrollView horizontal={true} className=' pb-3 pl-1 '>
                   {
                   FocastDataInfo.map((hour, index) => {
                    return(

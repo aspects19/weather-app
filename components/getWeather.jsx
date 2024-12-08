@@ -44,6 +44,7 @@ const getWeatherAndForecast = async (place) => {
 
       const weatherInfo = {
         name: place,
+        icon: icons.flurries,
         temperature: 25,
         country: "Kenya",
         cloudCover: 50,

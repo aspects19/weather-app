@@ -1,16 +1,20 @@
-import { View, Text, Image, TouchableOpacity, Linking } from 'react-native';
+import { View, Text, Image, TouchableOpacity, Linking, TextInput, Keyboard } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { BlurView } from 'expo-blur';
+import * as ImagePicker from 'expo-image-picker';
 import { setItemAsync ,getItemAsync } from '../../components/asyncStorageReadWrite';
-import { FontAwesome, AntDesign, Octicons, Zocial, Ionicons, FontAwesome6, Feather } from '@expo/vector-icons';
+import { FontAwesome, AntDesign, Octicons, Zocial, Ionicons, FontAwesome6, Feather, Entypo } from '@expo/vector-icons';
 import { useTemperature } from '../../context/tempContext';
+const profile = require('../../assets/icons/profile.png');
 
-import icons from '../../constants/icons';
 
 const Settings = () => {
   const [notificationStatus, setNotificationStatus] = useState(false);
   const {isCelcius, setIsCelcius} = useTemperature();
+  const [profileName, setProfileName] = useState('Your Name');
+  const [profileEmail, setProfileEmail] = useState('name@example.com');
+  const [profileImage, setProfileImage] = useState(profile);
 
   const handleNotificationToggle = () => {
     setNotificationStatus(!notificationStatus);
@@ -28,11 +32,48 @@ const Settings = () => {
         setIsCelcius(storedCelcius);
       }
     };
-  
-    loadCelciusStatus(); 
+
+    const loadProfilePic = async () => {
+      const storedProfilePic = await getItemAsync('profilePic');
+      if (storedProfilePic !== null) {
+        setProfileImage(storedProfilePic);
+      }
+    };
+
+    const loadProfileName = async () => {
+      const storedProfileName = await getItemAsync('name');
+      if (storedProfileName !== null) {
+        setProfileName(storedProfileName);
+      }
+    };
+
+    const loadProfileEmail = async () => {
+      const storedProfileEmail = await getItemAsync('email');
+      if (storedProfileEmail !== null) {
+        setProfileEmail(storedProfileEmail);
+      }
+    };
+
+    loadCelciusStatus();
+    loadProfilePic();
+    loadProfileName();
+    loadProfileEmail();
+
   }, []);
   
+  const PickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
 
+    if (!result.canceled) {
+      setProfileImage(result.assets[0].uri);
+      setItemAsync('profilePic', result.assets[0].uri);
+    }
+  };
   const SettingCard = ({ text, IconProvider, icon, toggle, onPress }) => {
     return (
       <TouchableOpacity className="ml-4 mb-3" onPress={onPress}>
@@ -69,22 +110,46 @@ const Settings = () => {
     );
   };
 
+
   return (
     <SafeAreaView>
-      <View className="h-full bg-[#121225] items-center">
-        <View className="h-40 w-full bg-[#191935] -mb-7"></View>
-        <View className="flex items-center content-center rounded-t-4xl bg-primary">
+      <View className="h-full bg-[#040515] items-center mb-1">
+        <View className="h-40 w-full bg-[#040515] -mb-7"></View>
+        <View className="flex items-center content-center rounded-t-4xl bg-[#0e1025]">
           <View className="flex items-center content-center h-32 w-32 -top-16 bg-gray-400 rounded-full">
-            <Image source={icons.profile} resizeMode="contain" className="h-28 w-28 mt-2 rounded-full" />
-            <Text className="text-white mt-4 text-[22px] font-extrabold">aspect dev</Text>
-            <Text className="text-slate-400 mt-2 text-[12px] font-semibold">aspect88@gmail.com</Text>
+            <Image source={profileImage} resizeMode="contain" className="h-28 w-28 mt-2 rounded-full" />
+            <Entypo name='edit' size={18} color='white' onPress={PickImage} style={{margin:0, marginTop:-13, marginLeft:30}}/>
+            <View className="flex flex-row items-end">
+              <TextInput
+                value={profileName}
+                onChangeText={setProfileName}
+                className="text-white mt-4 text-[22px] font-extrabold"
+                onSubmitEditing={() => {
+                  setItemAsync('name', profileName);
+                  Keyboard.dismiss();
+                }}
+              />
+              <Entypo name='edit' size={12} color='white' style={{paddingBottom: 5, paddingLeft: 3}} />
+            </View>
+            <View className="flex flex-row items-end">
+              <TextInput
+                value={profileEmail}
+                onChangeText={setProfileEmail}
+                className="text-slate-400  text-[12px] font-semibold"
+                onSubmitEditing={() => {
+                  setItemAsync('email', profileEmail);
+                  Keyboard.dismiss();
+                }}
+              />
+              <Entypo name='edit' size={12} color='white' style={{paddingBottom: 5, paddingLeft: 3}} />
+            </View>
           </View>
 
-          <View className="mt-3">
-            <SettingCard IconProvider={FontAwesome} icon="bell-o" text="Turn on notification" toggle={notificationStatus}onPress={handleNotificationToggle} />
+          <View className="mt-5">
+            <SettingCard IconProvider={FontAwesome} icon="bell-o" text="Turn on notification" toggle={notificationStatus} onPress={handleNotificationToggle} />
             <SettingCard IconProvider={FontAwesome6} icon="temperature-low" text="Use degrees Celcius" toggle={isCelcius} onPress={handleCelciusStatus} />
-            <SettingCard IconProvider={Ionicons} icon="share-social" text="Tell your friends?" onPress={()=>Linking.openURL("https://drive.google.com")}/>
-            <SettingCard IconProvider={Octicons} icon="repo" text="Project repo" onPress={()=>Linking.openURL("https://github.com/aspects19/weather-app")} />
+            <SettingCard IconProvider={Ionicons} icon="share-social" text="Tell your friends?" onPress={() => Linking.openURL("https://drive.google.com")} />
+            <SettingCard IconProvider={Octicons} icon="repo" text="Project repo" onPress={() => Linking.openURL("https://github.com/aspects19/weather-app")} />
 
             <BlurView intensity={1} tint="dark" className="h-20 w-11/12 mx-4 mr-10 pb-1 pt-3 rounded-[15px] justify-around items-center">
               <Text className="text-slate-200 -ml-9">version : 1.0.1</Text>
@@ -108,4 +173,4 @@ const Settings = () => {
   );
 };
 
-export default Settings;
+export default Settings

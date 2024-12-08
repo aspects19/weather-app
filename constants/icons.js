@@ -16,7 +16,7 @@ import heavyrain from '../assets/icons/rain_heavy.png';
 import lightrain from '../assets/icons/rain_light.png';
 import heavysnow from '../assets/icons/snow_heavy.png';
 import snow from '../assets/icons/snow.png';
-import thundestorm from '../assets/icons/tstorm.png';
+import thunderstorm from '../assets/icons/tstorm.png';
 
 
 export default {
@@ -36,7 +36,7 @@ export default {
   lightrain,
   snow,
   heavysnow,
-  thundestorm,
+  thunderstorm,
   profile,
   plus,
 }
