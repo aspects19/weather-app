@@ -1,6 +1,6 @@
 import icons from "../constants/icons";
 
-export const getWeatherIcon = (weatherData) => {
+const getWeatherIcon = (weatherData) => {
   const {
     cloudCover,
     precipitationProbability,

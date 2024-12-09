@@ -5,7 +5,7 @@ import 'react-native-gesture-handler';
 
 const Welcome = () => {
   return (
-    <Redirect href="/settings"/>
+    <Redirect href="/home"/>
   )
 }
 

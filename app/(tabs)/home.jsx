@@ -123,7 +123,7 @@ const home = () => {
                   <Text className="text-white font-semibold text-xl pt-8">{weatherDataInfo.name}, <Text className="font-normal">{weatherDataInfo.country}</Text></Text>
                   <Image source={weatherDataInfo.icon} resizeMode="contain" className="h-44 w-48" />
                   <Text className="font-extrabold text-white text-[37px] pt-3">{isCelcius ? `${weatherDataInfo.temperature} °C` : `${weatherDataInfo.temperature*(9/5)} °F`} </Text>
-                  <Text className="font-normal text-white text-lg">Expecting some light rain today.</Text>
+                  <Text className="font-normal text-white text-lg">{weatherDataInfo.description}</Text>
                   <View className="flex flex-row justify-between w-full px-8 mb-3 pt-7">
                     <View className="flex flex-row items-center">
                       <Feather name="wind" size={24} color="white" />
@@ -169,7 +169,7 @@ const home = () => {
                        icon={hour.icon}
                      />
                    )
-                 })
+                  })
                   }
                 </ScrollView>
                 </View>

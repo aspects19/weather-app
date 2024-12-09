@@ -148,7 +148,7 @@ const Settings = () => {
           <View className="mt-5">
             <SettingCard IconProvider={FontAwesome} icon="bell-o" text="Turn on notification" toggle={notificationStatus} onPress={handleNotificationToggle} />
             <SettingCard IconProvider={FontAwesome6} icon="temperature-low" text="Use degrees Celcius" toggle={isCelcius} onPress={handleCelciusStatus} />
-            <SettingCard IconProvider={Ionicons} icon="share-social" text="Tell your friends?" onPress={() => Linking.openURL("https://drive.google.com")} />
+            <SettingCard IconProvider={Ionicons} icon="share-social" text="Tell your friends?" onPress={() => Linking.openURL("https://github.com/aspects19/weather-app/releases")} />
             <SettingCard IconProvider={Octicons} icon="repo" text="Project repo" onPress={() => Linking.openURL("https://github.com/aspects19/weather-app")} />
 
             <BlurView intensity={1} tint="dark" className="h-20 w-11/12 mx-4 mr-10 pb-1 pt-3 rounded-[15px] justify-around items-center">
@@ -164,7 +164,7 @@ const Settings = () => {
           <View className="flex w-11/12 flex-row mt-3">
             <SocialCard IconProvider={Zocial} icon="github" link="https://github.com/aspects19" />
             <SocialCard IconProvider={AntDesign} icon="linkedin-square" link="https://www.linkedin.com/in/jeffarson-amenya-55ba872b9/" />
-            <SocialCard IconProvider={FontAwesome6} icon="square-instagram" link="https://www.instagram.com/_americ_inc" />
+            <SocialCard IconProvider={FontAwesome6} icon="square-instagram" link="https://www.instagram.com/americ_inc" />
             <SocialCard IconProvider={FontAwesome6} icon="x-twitter" link="https://www.x.com/americ_inc_" />
           </View>
         </View>

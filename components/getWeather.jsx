@@ -1,5 +1,6 @@
 import getWeatherIcon from "./getWeatherIcon";
 import icons from "../constants/icons";
+import getDescription from './getDescription';
 
 const getWeatherAndForecast = async (place) => {
   // const apiKey = process.env.EXPO_PUBLIC_TOMORROW_API
@@ -42,14 +43,31 @@ const getWeatherAndForecast = async (place) => {
       //   windSpeed : weatherData.data.values.windSpeed, 
       // };
 
+      const weatherData = {
+        time: "2021-09-15T12:00:00Z",
+        data: {
+          values: {
+            cloudCover: 50,
+            humidity: 50,
+            precipitationProbability: 300,
+            pressure: 103,
+            rainIntensity: 3,
+            visibility: 10,
+            windDirection: 180,
+            windSpeed: 5,
+          },
+        },
+      };
+
       const weatherInfo = {
         name: place,
-        icon: icons.flurries,
+        description: getDescription(weatherData),
+        icon: getWeatherIcon(weatherData),
         temperature: 25,
         country: "Kenya",
-        cloudCover: 50,
+        cloudCover: 0,
         humidity: 50,
-        precipitationProbability: 0,
+        precipitationProbability: 300,
         pressure: 103,
         rainIntensity: 0,
         visibility: 10,
