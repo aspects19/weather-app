@@ -6,7 +6,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { setItemAsync ,getItemAsync } from '../../components/asyncStorageReadWrite';
 import { FontAwesome, AntDesign, Octicons, Zocial, Ionicons, FontAwesome6, Feather, Entypo } from '@expo/vector-icons';
 import { useTemperature } from '../../context/tempContext';
-const profile = require('../../assets/icons/profile.png');
+import icons from '../../constants/icons'
 
 
 const Settings = () => {
@@ -14,7 +14,7 @@ const Settings = () => {
   const {isCelcius, setIsCelcius} = useTemperature();
   const [profileName, setProfileName] = useState('Your Name');
   const [profileEmail, setProfileEmail] = useState('name@example.com');
-  const [profileImage, setProfileImage] = useState(profile);
+  const [profileImage, setProfileImage] = useState(icons.profile);
 
   const handleNotificationToggle = () => {
     setNotificationStatus(!notificationStatus);
@@ -117,7 +117,7 @@ const Settings = () => {
         <View className="h-40 w-full bg-[#040515] -mb-7"></View>
         <View className="flex items-center content-center rounded-t-4xl bg-[#0e1025]">
           <View className="flex items-center content-center h-32 w-32 -top-16 bg-gray-400 rounded-full">
-            <Image source={profileImage} resizeMode="contain" className="h-28 w-28 mt-2 rounded-full" />
+            <Image source={ profileImage} resizeMode="contain" className="h-28 w-28 mt-2 rounded-full" />
             <Entypo name='edit' size={18} color='white' onPress={PickImage} style={{margin:0, marginTop:-13, marginLeft:30}}/>
             <View className="flex flex-row items-end">
               <TextInput
