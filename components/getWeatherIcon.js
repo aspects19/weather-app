@@ -1,16 +1,16 @@
 import icons from "../constants/icons";
 
-const getWeatherIcon = (weatherData) => {
+const getWeatherIcon = (weatherData, time) => {
   const {
     cloudCover,
     precipitationProbability,
     rainIntensity,
     visibility,
-  } = weatherData.data.values;
+  } = weatherData.values;
 
-  const utcTime = new Date(weatherData.time);
+  const utcTime = new Date(time);
   const eatTime = new Date(utcTime.getTime() + 3 * 60 * 60 * 1000); 
-
+  
   const hours = eatTime.getHours();
   const isDay = hours >= 6 && hours <= 18;
 

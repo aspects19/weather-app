@@ -9,11 +9,11 @@ const getWeatherAndForecast = async (place) => {
   // const weatherUrl = `https://api.tomorrow.io/v4/weather/realtime?location=${formattedLocation}&apikey=${apiKey}`;
   // const forecastUrl =`https://api.tomorrow.io/v4/weather/forecast?location=${formattedLocation}&apikey=${apiKey}`;
     
-  // const formatTimeToEAT = (utcTime) => {
-  //   const date = new Date(utcTime);
-  //   date.setHours(date.getHours()); 
-  //   return date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
-  // };
+  const formatTimeToEAT = (utcTime) => {
+    const date = new Date(utcTime);
+    date.setHours(date.getHours()); 
+    return date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
+  };
   
   try {
     // const [weatherResponse, forecastResponse] = await Promise.all([
@@ -62,7 +62,7 @@ const getWeatherAndForecast = async (place) => {
       const weatherInfo = {
         name: place,
         description: getDescription(weatherData),
-        icon: getWeatherIcon(weatherData),
+        icon: getWeatherIcon(weatherData.data, weatherData.time),
         temperature: 25,
         country: "Kenya",
         cloudCover: 0,
@@ -75,74 +75,102 @@ const getWeatherAndForecast = async (place) => {
         windSpeed: 5,
       };
 
-    // const mapForecastToIcon = (forecastData) => {
-    //   const { rainIntensity, cloudCover } = forecastData;
+
+    const forecastData = {
+      timelines: {
+        hourly: [
+          {
+            time: "2021-09-15T12:00:00Z",
+            values: {
+              rainIntensity: 0,
+              cloudCover: 0,
+              windSpeed: 0,
+              temperature: 25,
+            },
+          },
+          {
+            time: "2021-09-15T13:00:00Z",
+            values: {
+              rainIntensity: 0,
+              cloudCover: 0,
+              windSpeed: 0,
+              temperature: 25,
+            },
+          },
+          {
+            time: "2021-09-15T14:00:00Z",
+            values: {
+              rainIntensity: 0,
+              cloudCover: 0,
+              windSpeed: 0,
+              temperature: 25,
+            },
+          },
+          {
+            time: "2021-09-15T15:00:00Z",
+            values: {
+              rainIntensity: 0,
+              cloudCover: 0,
+              windSpeed: 0,
+              temperature: 25,
+            },
+          },
+          {
+            time: "2021-09-15T16:00:00Z",
+            values: {
+              rainIntensity: 0,
+              cloudCover: 0,
+              windSpeed: 0,
+              temperature: 25,
+            },
+          },
+          {
+            time: "2021-09-15T17:00:00Z",
+            values: {
+              rainIntensity: 0,
+              cloudCover: 0,
+              windSpeed: 0,
+              temperature: 25,
+            },
+          },
+          {
+            time: "2021-09-15T18:00:00Z",
+            values: {
+              rainIntensity: 0,
+              cloudCover: 0,
+              windSpeed: 0,
+              temperature: 25,
+            },
+          },
+          {
+            time: "2021-09-15T19:00:00Z",
+            values: {
+              rainIntensity: 0,
+              cloudCover: 0,
+              windSpeed: 0,
+              temperature: 25,
+            },
+          },
+        ],
+      },
+    };
+
+    const hourlyForecasts = [];
     
-    //   if (rainIntensity > 0) {
-    //     return icons.drizzle;
-    //   } else if (cloudCover > 50) {
-    //     return icons.cloudy; 
-    //   } else {
-    //     return icons.clearday; 
-    //   }
-    // };
-    
-    const hourlyForecasts = [
-      {
-        time: "Now",
-        temperature: 43,
-        rainIntensity: 40,
-        cloudCover: 44,
-        windSpeed: 77,
-        icon: icons.clearday,
-      },
-      {
-        time: "8.00",
-        temperature: 30,
-        rainIntensity: 40,
-        cloudCover: 44,
-        windSpeed: 77,
-        icon: icons.clearday,
-      },
-      {
-        time: "9.00",
-        temperature: 3,
-        rainIntensity: 40,
-        cloudCover: 44,
-        windSpeed: 77,
-        icon: icons.clearday,
-      },
-      {
-        time: "10.00",
-        temperature: 20,
-        rainIntensity: 40,
-        cloudCover: 44,
-        windSpeed: 77,
-        icon: icons.clearday,
-      },
-      {
-        time: "11.00",
-        temperature: 80,
-        rainIntensity: 40,
-        cloudCover: 44,
-        windSpeed: 77,
-        icon: icons.clearday,
-      },
-    ];
-    
-    // for (let i = 0; i < 8; i++) {
-    //   const hourlyData = forecastData.timelines.hourly[i];
-    //   const forecast = {
-    //     time: i === 0 ? "Now" : formatTimeToEAT(hourlyData.time),
-    //     rainIntensity: hourlyData.values.rainIntensity,
-    //     cloudCover: hourlyData.values.cloudCover,
-    //     windSpeed: hourlyData.values.windSpeed,
-    //     icon: mapForecastToIcon(hourlyData.values),
-    //   };
+    for (let i = 0; i < 8; i++) {
+      const hourlyData = forecastData.timelines.hourly[i];
+      const forecast = {
+        time: i === 0 ? "Now" : formatTimeToEAT(hourlyData.time),
+        rainIntensity: hourlyData.values.rainIntensity,
+        cloudCover: hourlyData.values.cloudCover,
+        windSpeed: hourlyData.values.windSpeed,
+        temperature: hourlyData.values.temperature,
+        icon: getWeatherIcon(hourlyData, hourlyData.time),
+      };
       
       
-    //   hourlyForecasts.push(forecast);
-    // }
+      hourlyForecasts.push(forecast);
+    }
     
     return {
       weatherInfo,
