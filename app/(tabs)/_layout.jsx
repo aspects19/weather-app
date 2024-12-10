@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { Tabs } from 'expo-router';
 import { TemperatureProvider } from '../../context/tempContext';
-import { StatusBar } from 'expo-status-bar';
 import Feather from '@expo/vector-icons/Feather';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -74,7 +73,6 @@ const RootLayout = () => {
           
         </Tabs>
       </TemperatureProvider>
-      <StatusBar backgroundColor="#161622" style="light"  />
     </View>
   );
 };

@@ -1,4 +1,4 @@
-import { View, TextInput, Text, Image, ScrollView, TouchableOpacity, KeyboardAvoidingView} from 'react-native';
+import { View, TextInput, Text, Image, ScrollView, TouchableOpacity } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { BlurView } from 'expo-blur';
@@ -79,7 +79,7 @@ const home = () => {
 
   return (
     <SafeAreaView>
-      <StatusBar backgroundColor="#161622" style="light" />
+      <StatusBar backgroundColor={"#151320"} style="light" />
       <View className='h-full bg-primary pl-2'>
         { isloading ? <HomeSkeleton/> : (
             weatherDataInfo===null ? 
@@ -177,7 +177,7 @@ const home = () => {
           ) 
         } 
       </View>
-    </SafeAreaView>
+      </SafeAreaView>
   )
 };
 

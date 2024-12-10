@@ -3,18 +3,20 @@ import React, { useState, useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { BlurView } from 'expo-blur';
 import * as ImagePicker from 'expo-image-picker';
+import { StatusBar } from 'expo-status-bar';
 import { setItemAsync ,getItemAsync } from '../../components/asyncStorageReadWrite';
 import { FontAwesome, AntDesign, Octicons, Zocial, Ionicons, FontAwesome6, Feather, Entypo } from '@expo/vector-icons';
 import { useTemperature } from '../../context/tempContext';
-import icons from '../../constants/icons'
-
+import icons from '../../constants/icons';
+import { useIsFocused } from '@react-navigation/native';
 
 const Settings = () => {
   const [notificationStatus, setNotificationStatus] = useState(false);
   const {isCelcius, setIsCelcius} = useTemperature();
-  const [profileName, setProfileName] = useState('Your Name');
+  const [profileName, setProfileName] = useState('Aspect');
   const [profileEmail, setProfileEmail] = useState('name@example.com');
   const [profileImage, setProfileImage] = useState(icons.profile);
+  const isFocused = useIsFocused();
 
   const handleNotificationToggle = () => {
     setNotificationStatus(!notificationStatus);
@@ -110,12 +112,12 @@ const Settings = () => {
     );
   };
 
-
   return (
     <SafeAreaView>
+      {isFocused && <StatusBar backgroundColor={"#040515"} style="light" />}
       <View className="h-full bg-[#040515] items-center mb-1">
         <View className="h-40 w-full bg-[#040515] -mb-7"></View>
-        <View className="flex items-center content-center rounded-t-4xl bg-[#0e1025]">
+        <View className="flex items-center content-center rounded-t-4xl bg-[#0b0c1d]">
           <View className="flex items-center content-center h-32 w-32 -top-16 bg-gray-400 rounded-full">
             <Image source={ profileImage} resizeMode="contain" className="h-28 w-28 mt-2 rounded-full" />
             <Entypo name='edit' size={18} color='white' onPress={PickImage} style={{margin:0, marginTop:-13, marginLeft:30}}/>
@@ -129,7 +131,7 @@ const Settings = () => {
                   Keyboard.dismiss();
                 }}
               />
-              <Entypo name='edit' size={12} color='white' style={{paddingBottom: 5, paddingLeft: 3}} />
+              <Entypo name='edit' size={12} color='white' style={{paddingBottom: 5}} />
             </View>
             <View className="flex flex-row items-end">
               <TextInput
@@ -141,7 +143,7 @@ const Settings = () => {
                   Keyboard.dismiss();
                 }}
               />
-              <Entypo name='edit' size={12} color='white' style={{paddingBottom: 5, paddingLeft: 3}} />
+              <Entypo name='edit' size={12} color='white' style={{paddingBottom: 5}} />
             </View>
           </View>
 
@@ -155,7 +157,7 @@ const Settings = () => {
               <Text className="text-slate-200 -ml-9">version : 1.0.1</Text>
               <View className="flex flex-row">
                 <Text className="text-slate-400">developer :</Text>
-                <Text onPress={() => Linking.openURL("https://github.com/aspects19")} className="text-blue-300 text-sm">aspect19</Text>
+                <Text onPress={() => Linking.openURL("https://github.com/aspects19")} className="text-blue-300 text-sm underline pl-2">aspect19</Text>
               </View>
               <Text className="text-slate-500 text-sm">Built with React Native, Expo and NativeWind</Text>
             </BlurView>
