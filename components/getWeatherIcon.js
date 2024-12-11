@@ -12,7 +12,7 @@ const getWeatherIcon = (weatherData, time) => {
   const eatTime = new Date(utcTime.getTime() + 3 * 60 * 60 * 1000); 
   
   const hours = eatTime.getHours();
-  const isDay = hours >= 6 && hours <= 18;
+  const isDay = hours >= 9 && hours <= 21;
 
   if (precipitationProbability > 80 && rainIntensity > 2) {
     return icons.heavyrain;
@@ -23,7 +23,7 @@ const getWeatherIcon = (weatherData, time) => {
   } else if (precipitationProbability > 20 && visibility < 10) {
     return icons.lightfog;
   } else if (cloudCover > 80) {
-    return isDay ? icons.cloudy : icons.mostlycloudynight;
+    return isDay ? icons.cloudy : icons.mostlycloudy;
   } else if (cloudCover > 50) {
     return isDay ? icons.partlycloudyday : icons.partlycloudynight;
   } else if (precipitationProbability < 20 && cloudCover < 20) {

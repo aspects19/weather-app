@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { BlurView } from 'expo-blur';
 import { StatusBar } from 'expo-status-bar';
+import { useIsFocused } from '@react-navigation/native';
 import getWeatherAndForecast from '../../components/getWeather';
 import { setItemAsync, getItemAsync } from '../../components/asyncStorageReadWrite';
 import HomeSkeleton from '../../components/skeleton';
@@ -15,14 +16,13 @@ import {
   AntDesign,
   } from '@expo/vector-icons';
 
-import CustomAlert from '../../components/customAlert';
-
 const home = () => {
   const [location, setLocation] = useState("");
   const [weatherDataInfo, setWeatherDataInfo] = useState(null);
   const [FocastDataInfo, setFocastDataInfo] = useState(null);
   const [ isloading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
+  const isFocused = useIsFocused();
 
   const {isCelcius} = useTemperature();
 
@@ -72,14 +72,14 @@ const home = () => {
         intensity={80} tint='dark' className='flex items-center rounded-lg overflow-hidden h-32 w-24 mt-4 mr-3 py-4 bg-[#4c558679]'>
         <Image resizeMode='contain' source={icon} className='h-12 w-12'/>
         <Text className='text-white text-lg pt-1'>{time}</Text>
-        <Text className='text-white text-xl font-semibold'>{isCelcius ? `${temperature} °C` : `${temperature*(9/5)} °F`}</Text>
+        <Text className='text-white text-xl font-semibold'>{isCelcius ? `${Math.round(temperature)} °C` : `${Math.round(temperature*(9/5))} °F`}</Text>
       </BlurView>
     )
   };
 
   return (
     <SafeAreaView>
-      <StatusBar backgroundColor={"#151320"} style="light" />
+      {isFocused && <StatusBar backgroundColor={"#151320"} style="light" />}
       <View className='h-full bg-primary pl-2'>
         { isloading ? <HomeSkeleton/> : (
             weatherDataInfo===null ? 
@@ -122,7 +122,7 @@ const home = () => {
                   </View>
                   <Text className="text-white font-semibold text-xl pt-8">{weatherDataInfo.name}, <Text className="font-normal">{weatherDataInfo.country}</Text></Text>
                   <Image source={weatherDataInfo.icon} resizeMode="contain" className="h-44 w-48" />
-                  <Text className="font-extrabold text-white text-[37px] pt-3">{isCelcius ? `${weatherDataInfo.temperature} °C` : `${weatherDataInfo.temperature*(9/5)} °F`} </Text>
+                  <Text className="font-extrabold text-white text-[37px] pt-3">{isCelcius ? `${Math.round(weatherDataInfo.temperature)} °C` : `${Math.round(weatherDataInfo.temperature*(9/5))} °F`} </Text>
                   <Text className="font-normal text-white text-lg">{weatherDataInfo.description}</Text>
                   <View className="flex flex-row justify-between w-full px-8 mb-3 pt-7">
                     <View className="flex flex-row items-center">
