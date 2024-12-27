@@ -22,7 +22,8 @@
       },
       "permissions": [
         "android.permission.RECORD_AUDIO"
-      ]
+      ],
+      "package": "com.aspect19.weatherapp"
     },
     "web": {
       "bundler": "metro",
