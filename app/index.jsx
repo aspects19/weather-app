@@ -11,7 +11,8 @@ const Welcome = () => {
     <View className="h-full">
       
       <Onboarding
-        onDone={() => console.log('done')}
+        controlStatusBar= {false}
+        onDone={() => <Redirect href="home" />}
         pages={[
           {
             backgroundColor: 'blue',
