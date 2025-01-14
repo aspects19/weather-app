@@ -1,1 +1,0 @@
-### Weather Mobile app Written in React Native

@@ -4,7 +4,7 @@ import { MotiView, ScrollView } from 'moti';
 import { Skeleton } from 'moti/skeleton';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const SkeletonLoader = ({ width, height, borderRadius, padding }) => {
+const SkeletonLoader = ({ width, height, borderRadius }) => {
   return (
     <Skeleton 
       colorMode='dark' 
@@ -52,7 +52,7 @@ const HomeSkeleton = () => {
             <SkeletonLoader width={60} height={35} borderRadius={8} />
             <SkeletonLoader width={60} height={35} borderRadius={8} />
           </View>
-          <Spacer height={45} />
+          <Spacer height={30} />
           <ScrollView horizontal={true} className='flex flex-row w-full '>
             <Spacer width={15} />
             <SkeletonLoader width={100} height={120} borderRadius={8} />

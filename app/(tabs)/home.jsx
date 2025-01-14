@@ -78,7 +78,7 @@ const home = () => {
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView className='bg-primary h-full'>
       {isFocused && <StatusBar backgroundColor={"#151320"} style="light" />}
       <View className='h-full bg-primary pl-2'>
         { isloading ? <HomeSkeleton/> : (
@@ -89,7 +89,7 @@ const home = () => {
             </View>
             :
             <View>
-              <View className='w-full '>
+              <View className='w-full'>
                 
                 <View className=" w-full flex items-center text-center content-center">
                   <View className='flex flex-row justify-between px-3 pt-4 mt-2 w-full'>

@@ -9,12 +9,12 @@ import { Ionicons } from '@expo/vector-icons';
 const TabIcon = ({ provider: IconComponent, icon, focused,name }) => {
   return (
     <View className='flex items-center justify-center'>
-      <IconComponent
+      <IconComponent 
         name={icon}
         size={24}
         color={focused ? 'white' : 'grey'}
       />
-      <Text className={focused ? 'text-white' : ' text-gray-400'}>{name}</Text>
+      <Text className={` w-16 text-center ${focused ? 'text-white' : 'text-gray-400'}`}>{name}</Text>
     </View>
   );
 };
@@ -30,14 +30,15 @@ const RootLayout = () => {
             tabBarShowLabel: false,
             tabBarStyle: {
               backgroundColor: "#1d1f29",
-              borderTopWidth: 1,
-              borderTopColor: "#232533",
               height: 50,
-              marginBottom: 16,
+              display: "flex",
+              marginBottom: 13,
               marginTop: 7,
+              borderTopWidth: 0,
               marginHorizontal:16,
               borderRadius: 20,
-              paddingHorizontal: 10,
+              paddingBottom: 0,
+              paddingTop: 6,
             },
             
           }}
@@ -47,7 +48,7 @@ const RootLayout = () => {
             options={{
               headerShown: false,
               tabBarIcon: ({ focused }) => (
-                <TabIcon
+                <TabIcon 
                   provider={Feather} 
                   icon="home"
                   focused={focused}
