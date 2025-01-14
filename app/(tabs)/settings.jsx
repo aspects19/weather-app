@@ -65,7 +65,7 @@ const Settings = () => {
   
   const PickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      mediaTypes: ['images'],
       allowsEditing: true,
       aspect: [4, 3],
       quality: 1,
@@ -78,11 +78,11 @@ const Settings = () => {
   };
   const SettingCard = ({ text, IconProvider, icon, toggle, onPress }) => {
     return (
-      <TouchableOpacity className="ml-4 mb-3" onPress={onPress}>
+      <TouchableOpacity className="ml-4 mb-3 rounded-4xl" onPress={onPress}>
         <BlurView
-          intensity={80}
+          intensity={100}
           tint="dark"
-          className="h-12 w-11/12 pr-3 rounded-[10px] bg-[#4c558679] flex-row justify-between items-center"
+          className="h-14 w-11/12 pr-3 rounded-[15px]  flex-row justify-between items-center"
         >
           <View className="flex-row items-center px-3">
             <IconProvider name={icon} size={19} color="white" />
@@ -104,23 +104,23 @@ const Settings = () => {
         <BlurView
           intensity={80}
           tint="dark"
-          className="h-12 w-12 rounded-[15px] bg-[#4c558679] justify-center items-center"
+          className="h-14 w-14 rounded-[15px] bg-[#4c558679] justify-center items-center"
         >
-          <IconProvider name={icon} size={19} color="white" />
+          <IconProvider name={icon} size={20} color="white" />
         </BlurView>
       </TouchableOpacity>
     );
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView > 
       {isFocused && <StatusBar backgroundColor={"#040515"} style="light" />}
       <View className="h-full bg-[#040515] items-center mb-1">
         <View className="h-40 w-full bg-[#040515] -mb-7"></View>
         <View className="flex items-center content-center rounded-t-4xl bg-[#0b0c1d]">
           <View className="flex items-center content-center h-32 w-32 -top-16 bg-gray-400 rounded-full">
             <Image source={ profileImage} resizeMode="contain" className="h-28 w-28 mt-2 rounded-full" />
-            <Entypo name='edit' size={18} color='white' onPress={PickImage} style={{margin:0, marginTop:-13, marginLeft:30}}/>
+            <Entypo name='edit' size={13} color='white' onPress={PickImage} style={{margin:0, marginTop:-10, marginLeft:39}}/>
             <View className="flex flex-row items-end">
               <TextInput
                 value={profileName}
@@ -131,7 +131,7 @@ const Settings = () => {
                   Keyboard.dismiss();
                 }}
               />
-              <Entypo name='edit' size={12} color='white' style={{paddingBottom: 5}} />
+              <Entypo name='edit' size={6} color='white' style={{paddingBottom: 13}} />
             </View>
             <View className="flex flex-row items-end">
               <TextInput
@@ -143,27 +143,27 @@ const Settings = () => {
                   Keyboard.dismiss();
                 }}
               />
-              <Entypo name='edit' size={12} color='white' style={{paddingBottom: 5}} />
+              <Entypo name='edit' size={6} color='white' style={{paddingBottom: 10}} />
             </View>
           </View>
 
-          <View className="mt-5">
+          <View className="mt-16 flex items-center content-center px-4 ">
             <SettingCard IconProvider={FontAwesome} icon="bell-o" text="Turn on notification" toggle={notificationStatus} onPress={handleNotificationToggle} />
             <SettingCard IconProvider={FontAwesome6} icon="temperature-low" text="Use degrees Celcius" toggle={isCelcius} onPress={handleCelciusStatus} />
             <SettingCard IconProvider={Ionicons} icon="share-social" text="Tell your friends?" onPress={() => Linking.openURL("https://github.com/aspects19/weather-app/releases")} />
             <SettingCard IconProvider={Octicons} icon="repo" text="Project repo" onPress={() => Linking.openURL("https://github.com/aspects19/weather-app")} />
 
-            <BlurView intensity={1} tint="dark" className="h-20 w-11/12 mx-4 mr-10 pb-1 pt-3 rounded-[15px] justify-around items-center">
+            <BlurView intensity={1} tint="dark" className="h-20 w-11/12 mx-4 mr-10 pb-1 pt-3 rounded-[15px] justify-around items-center flex">
               <Text className="text-slate-200 -ml-9">version : 1.0.1</Text>
               <View className="flex flex-row">
                 <Text className="text-slate-400">developer :</Text>
                 <Text onPress={() => Linking.openURL("https://github.com/aspects19")} className="text-blue-300 text-sm underline pl-2">aspect19</Text>
               </View>
-              <Text className="text-slate-500 text-sm">Built with React Native, Expo and NativeWind</Text>
+              <Text className="text-slate-500 text-sm text-center w-full">Built with React Native, Expo and NativeWind</Text>
             </BlurView>
           </View>
 
-          <View className="flex w-11/12 flex-row mt-3">
+          <View className="flex w-11/12 flex-row mt-2 mb-2">
             <SocialCard IconProvider={Zocial} icon="github" link="https://github.com/aspects19" />
             <SocialCard IconProvider={AntDesign} icon="linkedin-square" link="https://www.linkedin.com/in/jeffarson-amenya-55ba872b9/" />
             <SocialCard IconProvider={FontAwesome6} icon="square-instagram" link="https://www.instagram.com/americ_inc" />

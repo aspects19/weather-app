@@ -69,7 +69,7 @@ const home = () => {
   const WeatherCard = ({time, temperature, icon}) => {
     return (
       <BlurView 
-        intensity={80} tint='dark' className='flex items-center rounded-lg overflow-hidden h-32 w-24 mt-4 mr-3 py-4 bg-[#4c558679]'>
+        intensity={80} tint='dark' className='flex items-center rounded-[14px] overflow-hidden h-40 w-28 mt-4 mr-3 py-4 bg-[#4c558679]'>
         <Image resizeMode='contain' source={icon} className='h-12 w-12'/>
         <Text className='text-white text-lg pt-1'>{time}</Text>
         <Text className='text-white text-xl font-semibold'>{isCelcius ? `${Math.round(temperature)} °C` : `${Math.round(temperature*(9/5))} °F`}</Text>
@@ -91,7 +91,7 @@ const home = () => {
             <View>
               <View className='w-full'>
                 
-                <View className=" w-full flex items-center text-center content-center">
+                <View className=" w-full flex items-center text-center content-center pt-6">
                   <View className='flex flex-row justify-between px-3 pt-4 mt-2 w-full'>
                     <FontAwesome name="navicon" size={19} color="white" />
                     <View className="w-8/12">
@@ -103,7 +103,7 @@ const home = () => {
                           placeholder="Type your location"
                           placeholderTextColor={"#333941"}
                           cursorColor={"grey"}
-                          className="h-8 w-full bg-[#c1c3c5] rounded-lg pl-3 pr-10"
+                          className="h-9 w-full bg-[#c1c3c5] rounded-lg pl-3 pr-10"
                         />
                         <Feather
                           name="search"
@@ -120,7 +120,7 @@ const home = () => {
                     </View>
                     <FontAwesome name="calendar" size={19} color="white" />
                   </View>
-                  <Text className="text-white font-semibold text-xl pt-8">{weatherDataInfo.name}, <Text className="font-normal">{weatherDataInfo.country}</Text></Text>
+                  <Text className="text-white font-semibold text-xl pt-8 mb-3">{weatherDataInfo.name}, <Text className="font-normal">{weatherDataInfo.country}</Text></Text>
                   <Image source={weatherDataInfo.icon} resizeMode="contain" className="h-44 w-48" />
                   <Text className="font-extrabold text-white text-[37px] pt-3">{isCelcius ? `${Math.round(weatherDataInfo.temperature)} °C` : `${Math.round(weatherDataInfo.temperature*(9/5))} °F`} </Text>
                   <Text className="font-normal text-white text-lg">{weatherDataInfo.description}</Text>
@@ -157,7 +157,7 @@ const home = () => {
               <View className='flex-1 justify-center items-center'>
               </View>
               <View>
-                <Text className='text-white text-xl pt-3 font-semibold pl-2'>🕜 Hourly Forecast</Text>
+                <Text className='text-white text-xl pt-3 font-semibold pl-2 mb-3 mt-1'>🕜 Hourly Forecast</Text>
                 <ScrollView horizontal={true} className=' pb-3 pl-1 '>
                   {
                   FocastDataInfo.map((hour, index) => {
@@ -181,7 +181,7 @@ const home = () => {
   )
 };
 
-const SearchModal = ({locationUpdater, onSubmit, ...rest}) => {
+const SearchModal = ({locationUpdater, onSubmit }) => {
   const [localLocation, setLocalLocation] = useState("");
   
   const handleLocalOnSubmit = (inputLocation) => {
@@ -196,13 +196,13 @@ const SearchModal = ({locationUpdater, onSubmit, ...rest}) => {
         <Text className='text-lg font-bold text-white mb-2 pl-2'>Type a location</Text>
         <View className=" w-full">
           <TextInput
-             onChangeText={setLocalLocation} 
+            className="h-10 w-full bg-[#c1c3c5] rounded-lg pl-3 pr-10 "
+            onChangeText={setLocalLocation} 
             onSubmitEditing= {()=>handleLocalOnSubmit(localLocation)} 
             value={localLocation}
             placeholder="Type your location"
             placeholderTextColor={"#333941"}
             cursorColor={"grey"}
-            className="h-8 w-full bg-[#c1c3c5] rounded-lg pl-3 pr-10"
           />
           <Feather
             name="search"
