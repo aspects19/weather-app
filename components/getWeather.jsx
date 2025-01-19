@@ -1,8 +1,12 @@
+import data from "../dummy/dummy.json" with { type: "json"};
+
 import getWeatherIcon from "./getWeatherIcon";
 import getDescription from './getDescription';
 
+
 const getWeatherAndForecast = async (place) => {
   const apiKey = process.env.EXPO_PUBLIC_TOMORROW_API
+  
   const formattedLocation = place.trim().replace(" ", "_");
 
   const weatherUrl = `https://api.tomorrow.io/v4/weather/realtime?location=${formattedLocation}&apikey=${apiKey}`;
@@ -15,18 +19,22 @@ const getWeatherAndForecast = async (place) => {
   };
   
   try {
-    const [weatherResponse, forecastResponse] = await Promise.all([
-      fetch(weatherUrl, { method: 'GET' }),
-      fetch(forecastUrl, { method: 'GET' }),
-    ]);
+    // const [weatherResponse, forecastResponse] = await Promise.all([
+    //   fetch(weatherUrl, { method: 'GET' }),
+    //   fetch(forecastUrl, { method: 'GET' }),
+    // ]);
     
+    // if (!weatherResponse.ok || !forecastResponse.ok) {
+    //   throw new Error("Failed to fetch weather data");
+    // }
 
-    if (!weatherResponse.ok || !forecastResponse.ok) {
-      throw new Error("Failed to fetch weather data");
-    }
 
-    const weatherData = await weatherResponse.json();
-    const forecastData = await forecastResponse.json();
+    // const weatherData = await weatherResponse.json();
+    // const forecastData = await forecastResponse.json();
+
+    //  const weatherData = data.weather;
+    //  const forecastData = data.forecast;
+
     const fullName = weatherData.location.name;
     const fullNameParts = fullName.split(",");
       const weatherInfo = {
@@ -44,118 +52,6 @@ const getWeatherAndForecast = async (place) => {
         windDirection : weatherData.data.values.windDirection,
         windSpeed : weatherData.data.values.windSpeed, 
       };
-
-      // const weatherData = {
-      //   time: "2021-09-15T12:00:00Z",
-      //   data: {
-      //     values: {
-      //       cloudCover: 50,
-      //       humidity: 50,
-      //       precipitationProbability: 300,
-      //       pressure: 103,
-      //       rainIntensity: 3,
-      //       visibility: 10,
-      //       windDirection: 180,
-      //       windSpeed: 5,
-      //     },
-      //   },
-      // };
-
-      // const weatherInfo = {
-      //   name: place,
-      //   description: getDescription(weatherData),
-      //   icon: getWeatherIcon(weatherData.data, weatherData.time),
-      //   temperature: 25,
-      //   country: "Kenya",
-      //   cloudCover: 0,
-      //   humidity: 50,
-      //   precipitationProbability: 300,
-      //   pressure: 103,
-      //   rainIntensity: 0,
-      //   visibility: 10,
-      //   windDirection: 180,
-      //   windSpeed: 5,
-      // };
-
-
-    // const forecastData = {
-    //   timelines: {
-    //     hourly: [
-    //       {
-    //         time: "2021-09-15T12:00:00Z",
-    //         values: {
-    //           rainIntensity: 0,
-    //           cloudCover: 0,
-    //           windSpeed: 0,
-    //           temperature: 25,
-    //         },
-    //       },
-    //       {
-    //         time: "2021-09-15T13:00:00Z",
-    //         values: {
-    //           rainIntensity: 0,
-    //           cloudCover: 0,
-    //           windSpeed: 0,
-    //           temperature: 25,
-    //         },
-    //       },
-    //       {
-    //         time: "2021-09-15T14:00:00Z",
-    //         values: {
-    //           rainIntensity: 0,
-    //           cloudCover: 0,
-    //           windSpeed: 0,
-    //           temperature: 25,
-    //         },
-    //       },
-    //       {
-    //         time: "2021-09-15T15:00:00Z",
-    //         values: {
-    //           rainIntensity: 0,
-    //           cloudCover: 0,
-    //           windSpeed: 0,
-    //           temperature: 25,
-    //         },
-    //       },
-    //       {
-    //         time: "2021-09-15T16:00:00Z",
-    //         values: {
-    //           rainIntensity: 0,
-    //           cloudCover: 0,
-    //           windSpeed: 0,
-    //           temperature: 25,
-    //         },
-    //       },
-    //       {
-    //         time: "2021-09-15T17:00:00Z",
-    //         values: {
-    //           rainIntensity: 0,
-    //           cloudCover: 0,
-    //           windSpeed: 0,
-    //           temperature: 25,
-    //         },
-    //       },
-    //       {
-    //         time: "2021-09-15T18:00:00Z",
-    //         values: {
-    //           rainIntensity: 0,
-    //           cloudCover: 0,
-    //           windSpeed: 0,
-    //           temperature: 25,
-    //         },
-    //       },
-    //       {
-    //         time: "2021-09-15T19:00:00Z",
-    //         values: {
-    //           rainIntensity: 0,
-    //           cloudCover: 0,
-    //           windSpeed: 0,
-    //           temperature: 25,
-    //         },
-    //       },
-    //     ],
-    //   },
-    // };
 
     const hourlyForecasts = [];
     
@@ -178,8 +74,8 @@ const getWeatherAndForecast = async (place) => {
       hourlyForecasts
     };
 
-  }catch (error) {
-    console.error("Error fetching weather data:", error);
+  }catch (err) {
+    console.log("Error fetching weather data:", err);
     throw new Error("Issue with calling");
   }
 };

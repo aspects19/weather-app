@@ -1,0 +1,101 @@
+{
+    "weather": {
+        "location": {
+          "name": "Kahawa Wendani, Kahawa Wendani ward, Ruiru, Kiambu, Central Kenya, 00609, Kenya",
+          "latitude": 0,
+          "longitude": 0
+        },
+        "time": "2021-09-15T12:00:00Z",
+        "data": {
+          "values": {
+            "cloudCover": 50,
+            "humidity": 50,
+            "precipitationProbability": 300,
+            "pressure": 103,
+            "rainIntensity": 3,
+            "visibility": 10,
+            "windDirection": 180,
+            "windSpeed": 5,
+            "temperature": 25
+          }
+        }
+    },
+    "forecast": {
+        "timelines": {
+        "hourly": [
+            {
+            "time": "2021-09-15T12:00:00Z",
+            "values": {
+                "rainIntensity": 0,
+                "cloudCover": 0,
+                "windSpeed": 0,
+                "temperature": 25
+            }
+            },
+            {
+            "time": "2021-09-15T13:00:00Z",
+            "values": {
+                "rainIntensity": 0,
+                "cloudCover": 0,
+                "windSpeed": 0,
+                "temperature": 25
+            }
+            },
+            {
+            "time": "2021-09-15T14:00:00Z",
+            "values": {
+                "rainIntensity": 0,
+                "cloudCover": 0,
+                "windSpeed": 0,
+                "temperature": 25
+            }
+            },
+            {
+            "time": "2021-09-15T15:00:00Z",
+            "values": {
+                "rainIntensity": 0,
+                "cloudCover": 0,
+                "windSpeed": 0,
+                "temperature": 25
+            }
+            },
+            {
+            "time": "2021-09-15T16:00:00Z",
+            "values": {
+                "rainIntensity": 0,
+                "cloudCover": 0,
+                "windSpeed": 0,
+                "temperature": 25
+            }
+            },
+            {
+            "time": "2021-09-15T17:00:00Z",
+            "values": {
+                "rainIntensity": 0,
+                "cloudCover": 0,
+                "windSpeed": 0,
+                "temperature": 25
+            }
+            },
+            {
+            "time": "2021-09-15T18:00:00Z",
+            "values": {
+                "rainIntensity": 0,
+                "cloudCover": 0,
+                "windSpeed": 0,
+                "temperature": 25
+            }
+            },
+            {
+            "time": "2021-09-15T19:00:00Z",
+            "values": {
+                "rainIntensity": 0,
+                "cloudCover": 0,
+                "windSpeed": 0,
+                "temperature": 25
+            }
+            }
+        ]
+        }
+    }
+}
