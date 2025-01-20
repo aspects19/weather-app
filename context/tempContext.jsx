@@ -2,7 +2,7 @@ import React,{useState, useContext, createContext} from "react";
 
 const TempContext = createContext();
 
-export const TemperatureProvider = ({children}) => {
+export const GlobalProvider = ({children}) => {
     const [isCelcius, setIsCelcius] = useState(true);
 
     return (

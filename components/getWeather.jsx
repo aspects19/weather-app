@@ -32,8 +32,8 @@ const getWeatherAndForecast = async (place) => {
     // const weatherData = await weatherResponse.json();
     // const forecastData = await forecastResponse.json();
 
-    //  const weatherData = data.weather;
-    //  const forecastData = data.forecast;
+     const weatherData = data.weather;
+     const forecastData = data.forecast;
 
     const fullName = weatherData.location.name;
     const fullNameParts = fullName.split(",");

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { Tabs } from 'expo-router';
-import { TemperatureProvider } from '../../context/tempContext';
+import { Tabs, usePathname } from 'expo-router';
+import { GlobalProvider } from '../../context/tempContext';
 import Feather from '@expo/vector-icons/Feather';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -21,9 +21,15 @@ const TabIcon = ({ provider: IconComponent, icon, focused,name }) => {
 
 
 const RootLayout = () => {
+  const pathname = usePathname();
+  const tabBarColor = pathname === '/home' ? '#151320' : '#040515';
+  const tabStyles = {
+    backgroundColor: tabBarColor,
+    height: "100%",
+  }
   return (
-    < View className= 'h-full bg-primary'>
-      <TemperatureProvider>
+    < View style={tabStyles}>
+      <GlobalProvider>
         <Tabs
           screenOptions={{
             tabBarHideOnKeyboard: true,
@@ -73,7 +79,7 @@ const RootLayout = () => {
           />
           
         </Tabs>
-      </TemperatureProvider>
+      </GlobalProvider>
     </View>
   );
 };
