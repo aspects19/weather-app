@@ -1,5 +1,5 @@
-import favicon from '../assets/images/favicon.png';
+import appLogo from '../assets/images/app-logo.png';
 
 export default {
-  favicon,
+  appLogo,
 };
