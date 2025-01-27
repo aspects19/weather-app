@@ -38,9 +38,9 @@ To run the Weather App locally, follow these steps:
 
 4. Start app
 
-```sh
-npm start
-```
+   ```sh
+   npm start
+   ```
 
 5. Scan the QR code on the terminal on Expo Go App on your phone.
 6. 🎉 Your app is up and running. View it on Expo Go mobile app .
