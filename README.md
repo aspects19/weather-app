@@ -14,10 +14,6 @@ Welcome to the Weather App! 🌤️ This app provides real-time weather updates 
 - Location-based weather (using  search by city).
 - Responsive and intuitive design for mobile devices.
 
-## Demo
-
-[View the live demo here](https://graymatter4.pages.dev) (if available).
-
 ## Installation
 
 To run the Weather App locally, follow these steps:
