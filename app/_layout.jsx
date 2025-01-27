@@ -7,8 +7,10 @@ const RootLayout = () => {
   return (
     <>
       <Stack
+        detachInactiveScreens={false}
         screenOptions={{
           headerShown: false,
+          presentation: "transparentModal",
           contentStyle: {
             backgroundColor: "#151320",
           },
