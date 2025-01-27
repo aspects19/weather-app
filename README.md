@@ -43,4 +43,8 @@ npm start
 ```
 
 5. Scan the QR code on the terminal on Expo Go App on your phone.
-6. 🎉 Your app is up.
+6. 🎉 Your app is up and running. View it on Expo Go mobile app .
+
+### Contributions
+
+If You wish to make contributions to this project such as reporting issues and bugs, fixing them and adding features, take a look at [contribution guide](https://github.com/aspects19/weather-app/CONTRIBUTING.md)
