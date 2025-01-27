@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "3-weather-app",
-    "slug": "3-weather-app",
-    "scheme": "3-weather-app",
+    "name": "weather-app",
+    "slug": "weather-app",
+    "scheme": "weather-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/images/app-logo.png",
     "userInterfaceStyle": "dark",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/images/app-logo.png",
       "resizeMode": "contain",
       "backgroundColor": "#000000"
     },
@@ -18,7 +18,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/splash.png",
+        "foregroundImage": "./assets/images/app-logo.png",
         "backgroundColor": "#000000"
       }
     },

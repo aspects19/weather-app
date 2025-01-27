@@ -6,8 +6,15 @@ import '../global.css';
 const RootLayout = () => {
   return (
     <>
-      <Stack>
-        <Stack.Screen name="index" options={{headerShown: false}} />
+      <Stack
+        screenOptions={{
+          headerShown: false,
+          contentStyle: {
+            backgroundColor: "#151320",
+          },
+        }}>
+        <Stack.Screen name="index"  />
+        <Stack.Screen name="(tabs)"  />
       </Stack>
     </>
   );
