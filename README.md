@@ -45,6 +45,18 @@ To run the Weather App locally, follow these steps:
 5. Scan the QR code on the terminal on Expo Go App on your phone.
 6. 🎉 Your app is up and running. View it on Expo Go mobile app .
 
-### Contributions
+## Building the app
+
+You can download the prebuild apk of this app from [Releases](https://github.com/aspects19/weather-app/releases) section or build it from the sorce code as shown earlier.
+
+## Contributions
 
 If You wish to make contributions to this project such as reporting issues and bugs, fixing them and adding features, take a look at [contribution guide](https://github.com/aspects19/weather-app/CONTRIBUTING.md)
+
+## License
+
+This project is licensed under the MIT License – see the [LICENSE](https://github.com/aspects19/weather-app/LICENSE) file for details.
+
+##
+
+Thanks for checking out the Weather App! 🌦️ Feel free to open issues, fork the repository, or contribute to making it even better!
