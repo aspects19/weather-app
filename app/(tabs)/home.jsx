@@ -1,4 +1,4 @@
-import { View, TextInput, Text, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { View, TextInput, Text, Image, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { BlurView } from 'expo-blur';
@@ -21,7 +21,6 @@ const home = () => {
   const [weatherDataInfo, setWeatherDataInfo] = useState(null);
   const [FocastDataInfo, setFocastDataInfo] = useState(null);
   const [ isloading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
   const isFocused = useIsFocused();
 
   const {isCelcius} = useTemperature();
@@ -40,7 +39,7 @@ const home = () => {
   }, [])
 
   const handleOnSubmitEditing = async (location) => {
-    if (!location) return console.log("No location", location);
+    if (!location) return Alert.alert("Error", "Please provide a location");
     setIsLoading(true);
     try {
       const {weatherInfo, hourlyForecasts} = await getWeatherAndForecast(location);
@@ -49,19 +48,13 @@ const home = () => {
         setFocastDataInfo(hourlyForecasts);
         setIsLoading(false);
         setItemAsync("weatherInfo", weatherInfo);
-        console.log("Set Weather info to local storage");
-        
         setItemAsync("hourlyForecasts", hourlyForecasts)
-        console.log("Set focast info to local storage");
 
-      } else {
-        console.log("No data info");
-
-      }
+      } else  Alert.alert("Error", "No data info found");
 
     } catch (error) {
       setIsLoading(false)
-      console.log(`got an error from api call ${error}`);
+      Alert.alert("Error", "An error occured while fetching data\n Try again later");
     };
       
   };

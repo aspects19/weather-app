@@ -1,5 +1,4 @@
 import profile from '../assets/icons/profile.png';
-import plus from '../assets/icons/plus.png'
 import clearday from '../assets/icons/clear_day.png';
 import clearnight from '../assets/icons/clear_night.png';
 import cloudy from '../assets/icons/cloudy.png';
@@ -38,5 +37,4 @@ export default {
   heavysnow,
   thunderstorm,
   profile,
-  plus,
 }

@@ -2,8 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { Tabs, usePathname } from 'expo-router';
 import { GlobalProvider } from '../../context/tempContext';
-import Feather from '@expo/vector-icons/Feather';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, Feather } from '@expo/vector-icons';
 
 
 const TabIcon = ({ provider: IconComponent, icon, focused,name }) => {

@@ -78,7 +78,6 @@ const getWeatherAndForecast = async (place) => {
     };
 
   }catch (err) {
-    //console.log("Error fetching weather data:", err);
     throw new Error("Issue with calling");
   }
 };

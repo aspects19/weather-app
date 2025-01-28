@@ -80,8 +80,8 @@ const Settings = () => {
     return (
       <TouchableOpacity className="ml-4 mb-3 rounded-4xl" onPress={onPress}>
         <BlurView
-          intensity={100}
-          tint="dark"
+          intensity={10}
+          tint="light"
           className="h-14 w-11/12 pr-3 rounded-[15px]  flex-row justify-between items-center"
         >
           <View className="flex-row items-center px-3">
@@ -100,11 +100,11 @@ const Settings = () => {
 
   const SocialCard = ({ IconProvider, icon, link }) => {
     return (
-      <TouchableOpacity onPress={() => Linking.openURL(link)} className="mx-4 mb-3">
+      <TouchableOpacity onPress={() => Linking.openURL(link)} className="mx-4 mb-3 rounded-[80px]">
         <BlurView
-          intensity={80}
-          tint="dark"
-          className="h-14 w-14 rounded-[15px] bg-[#4c558679] justify-center items-center"
+          intensity={10}
+          tint="light"
+          className="h-14 w-14 rounded-[10px] bg-[#4c558679] justify-center items-center"
         >
           <IconProvider name={icon} size={20} color="white" />
         </BlurView>
@@ -121,7 +121,7 @@ const Settings = () => {
           <View className="flex items-center content-center h-32 w-32 -top-16 bg-gray-400 rounded-full">
             <Image source={ profileImage} resizeMode="contain" className="h-28 w-28 mt-2 rounded-full" />
             <Entypo name='edit' size={13} color='white' onPress={PickImage} style={{margin:0, marginTop:-10, marginLeft:39}}/>
-            <View className="flex flex-row items-end">
+            <View className="flex flex-row items-end ">
               <TextInput
                 value={profileName}
                 onChangeText={setProfileName}
@@ -163,7 +163,7 @@ const Settings = () => {
             </BlurView>
           </View>
 
-          <View className="flex w-11/12 flex-row mt-2 mb-2">
+          <View className="flex w-11/12 flex-row mt-4 mb-3">
             <SocialCard IconProvider={Zocial} icon="github" link="https://github.com/aspects19" />
             <SocialCard IconProvider={AntDesign} icon="linkedin-square" link="https://www.linkedin.com/in/jeffarson-amenya-55ba872b9/" />
             <SocialCard IconProvider={FontAwesome6} icon="square-instagram" link="https://www.instagram.com/americ_inc" />
