@@ -1,16 +1,13 @@
 import { Stack } from "expo-router";
 import React from "react";
-import '../global.css';
 
 
 const RootLayout = () => {
   return (
     <>
       <Stack
-        detachInactiveScreens={false}
         screenOptions={{
           headerShown: false,
-          presentation: "transparentModal",
           contentStyle: {
             backgroundColor: "#151320",
           },

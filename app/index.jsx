@@ -52,7 +52,7 @@ const Welcome = () => {
                Stay Ready
               </Text>
               <Text style={styles.onboardSubtitle}>
-                Discover joy in every forecast, rain or shine.
+              Real-time updates ensure you're never caught off guard. Stay prepared for sudden rain, temperature drops, or clear skies with just a glance.
               </Text>
             </View>
           </View>
@@ -70,7 +70,7 @@ const Welcome = () => {
                 Plan Ahead
               </Text>
               <Text style={styles.onboardSubtitle}>
-                Get accurate weather forecasts to start your day right
+              Start every day with confidence by checking precise weather forecasts. Know exactly what to expect before heading out, whether it’s sunshine or storms.
               </Text>
             </View>
           </View>
@@ -85,10 +85,10 @@ const Welcome = () => {
             <svgs.onboard_3 width={width} height={height} />
             <View style={styles.onboardTextWrapper}>
               <Text style={styles.onboardTitle}>
-                Stay Ready
+                Know Why
               </Text>
               <Text style={styles.onboardSubtitle}>
-                Be prepared for any weather with real-time updates.
+                Dive deeper into the weather. Learn about conditions with detailed forecasts and explanations, so you always understand what’s happening around you.
               </Text>
             </View>
           </View>
@@ -103,10 +103,10 @@ const Welcome = () => {
             <svgs.onboard_4 width={width} height={height} />
             <View style={styles.onboardTextWrapper}>
               <Text style={styles.onboardTitle}>
-                Know Why 
+               Stay Connected
               </Text>
               <Text style={styles.onboardSubtitle}>
-                Understand the weather with detailed explanations.
+                Stay informed wherever life takes you. Get live weather updates on the go, whether you’re shopping, traveling, or running errands.
               </Text>
             </View>
           </View>
@@ -123,8 +123,8 @@ const Welcome = () => {
               <Text style={styles.onboardTitle}>
                 Enjoy Every Moment
               </Text>
-              <Text style={styles.onboardSubtitle}>
-              Discover joy in every forecast, rain or shine.
+              <Text style={styles.onboardSubtitle} className=' color-[#bdc4ea]'>
+                Find joy in every moment, rain or shine. Let our app brighten your day with reliable forecasts that keep you smiling through any weather.
               </Text>
             </View>
           </View>
@@ -153,18 +153,19 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     width: '100%',
-    padding: 70,
+    paddingTop: 90,
     backgroundColor: 'transparent', 
   },
   onboardTitle: {
-    color: 'white',
+    color: '#8995d9',
     padding: 4,
+    marginBottom: 10,
     textAlign: 'center',
     fontSize: 35,
   },
   onboardSubtitle: {
-    color: 'white',
-    padding: 4,
+    color: '#bdc4ea',
+    paddingHorizontal: 15,
     textAlign: 'center',
     fontSize: 20,
   },
