@@ -2,7 +2,8 @@
 
 First off, thank you for considering contributing to this project! 🙏
 
-Whether you’re fixing a bug, adding a new feature, or improving the documentation, all contributions are **welcome**.
+Whether you’re fixing a bug, adding a new feature, or improving the documentation, all contributions are **welcome**. <br>
+Designs contributions are also welcome as most resources in this project are svg based.
 
 ## How to Contribute
 
@@ -32,7 +33,7 @@ git checkout -b your-branch-name
 - Make your changes and write clear, concise commit messages.
 - If you’re fixing a bug or adding a feature, please ensure you write tests where applicable.
 
-### 5. Commit your changes.
+### 5. Commit your changes
 
 - Stage and commit your changes.
 
@@ -41,7 +42,7 @@ git checkout -b your-branch-name
   git commit -m "Description of your changes"
 ```
 
-### 6. Push your fork.
+### 6. Push your fork
 
 - Push your changes back to your fork on GitHub:
 
@@ -49,7 +50,7 @@ git checkout -b your-branch-name
   git push origin your-branch-name
 ```
 
-### 7 Create a pull request.
+### 7 Create a pull request
 
 - Open a pull request against the main branch of the repository with a description of the changes you've made.
 
