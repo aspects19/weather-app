@@ -3,7 +3,8 @@
 First off, thank you for considering contributing to this project! 🙏
 
 Whether you’re fixing a bug, adding a new feature, or improving the documentation, all contributions are **welcome**. <br>
-Designs contributions are also welcome as most resources in this project are svg based.
+Designs contributions are also welcome as most resources in this project are svg based.<br>
+The Weather icons can be found on [Tomorrow API Github repo](https://github.com/Tomorrow-IO-API/tomorrow-weather-codes/tree/master/V1_icons/color) as svgs.
 
 ## How to Contribute
 

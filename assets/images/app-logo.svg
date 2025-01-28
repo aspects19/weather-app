@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xmlns:bx="https://boxy-svg.com">
+  <g>
+    <title>icon</title>
+    <rect style="stroke: rgba(224, 208, 208, 0); fill: url(&quot;#gradient-1&quot;); transform-origin: 255.997px 255.999px;" transform="matrix(1, -0.00001, 0.00001, 1, 0.00256, -0.00056)" width="511.998" height="511.998" rx="99" ry="99">
+      <title>background</title>
+    </rect>
+    <ellipse style="stroke: rgb(0, 0, 0); fill: rgb(255, 160, 0); stroke-width: 0px;" cx="285.072" cy="273.089" rx="96.397" ry="92.977">
+      <title>sun</title>
+    </ellipse>
+    <path style="stroke: rgb(0, 0, 0); fill: rgb(25, 118, 210); stroke-width: 0px;" d="M 200.352 227.912 C 172.68 224.722 148.195 233.825 130.561 249.669 C 112.927 265.513 101.143 286.479 102.954 310.252 C 0 324.314 19.805 429.529 90.171 432.866 L 197.099 432.543 L 304.027 432.22 C 332.635 417.832 337.154 405.752 343.637 390.302 C 350.12 374.852 347.543 359.273 343.371 348.695 C 337.343 339.425 334.36 312.976 286.086 307.592 C 279.017 242.401 220.902 227.611 200.352 227.912 Z">
+      <title>cloud</title>
+    </path>
+    <rect style="stroke: rgba(0, 0, 0, 0); stroke-width: 0px; stroke-linecap: round; stroke-miterlimit: 1; transform-box: fill-box; transform-origin: 50% 50%; fill: rgb(253, 161, 6);" transform="matrix(0.6968, 0.71727, -0.71727, 0.6968, -62.0105, -63.12212)" x="201.081" y="215.803" width="82.674" height="32.598" rx="16.3" ry="16.3">
+      <title>ray</title>
+    </rect>
+    <rect style="stroke: rgba(0, 0, 0, 0); stroke-width: 0px; stroke-linecap: round; stroke-miterlimit: 1; transform-origin: 242.417px 232.101px; fill: rgb(253, 161, 6);" transform="matrix(0.6968, 0.71727, -0.71727, 0.6968, 148.19696, 148.32775)" x="201.082" y="215.804" width="82.674" height="32.598" rx="16.3" ry="16.3">
+      <title>ray</title>
+    </rect>
+    <rect style="stroke: rgba(0, 0, 0, 0); stroke-width: 0px; stroke-linecap: round; stroke-miterlimit: 1; transform-origin: 242.418px 232.101px; fill: rgb(253, 161, 6);" transform="matrix(0.99997, 0.00796, -0.00796, 0.99997, 195.46141, 41.98094)" x="201.082" y="215.804" width="82.674" height="32.598" rx="16.3" ry="16.3">
+      <title>ray</title>
+    </rect>
+    <rect style="stroke-width: 0px; stroke-linecap: round; stroke-miterlimit: 1; transform-origin: 242.418px 232.101px; stroke: rgb(255, 160, 0); fill: rgb(253, 161, 6);" transform="matrix(0.71749, -0.69657, 0.69657, 0.71749, 148.71239, -63.64099)" x="201.082" y="215.803" width="82.674" height="32.598" rx="16.3" ry="16.3">
+      <title>ray</title>
+    </rect>
+    <rect style="stroke: rgba(0, 0, 0, 0); stroke-width: 0px; stroke-linecap: round; stroke-miterlimit: 1; transform-origin: 242.418px 232.101px; fill: rgb(253, 161, 6);" transform="matrix(-0.02967, 0.99956, -0.99956, -0.02967, 43.09271, -109.76654)" x="201.082" y="215.804" width="82.674" height="32.598" rx="16.3" ry="16.3">
+      <title>ray</title>
+    </rect>
+  </g>
+  <defs>
+    <bx:grid x="0.135" y="4.554" width="100" height="100"/>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="256" y1="0" x2="256" y2="512" id="gradient-1" gradientTransform="matrix(-0.75716, 0.65323, -1.05086, -1.03, 602.99123, 233.37008)">
+      <stop offset="0" style="stop-color: rgb(5, 15, 14);"/>
+      <stop offset="1" style="stop-color: rgb(84, 98, 104);"/>
+    </linearGradient>
+    <bx:export>
+      <bx:file format="png" path="app-logo.png"/>
+    </bx:export>
+  </defs>
+</svg>
