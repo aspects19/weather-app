@@ -4,9 +4,7 @@ import Onboarding from 'react-native-onboarding-swiper';
 import { Redirect, router } from 'expo-router';
 import { getItemAsync, setItemAsync } from '../components/asyncStorageReadWrite';
 
-import images from '../constants/images';
 import svgs from '../constants/svgs';
-
 
 const Welcome = () => {
   let {width, height} = useWindowDimensions();
@@ -14,15 +12,15 @@ const Welcome = () => {
 
   const [onboardDone, setOnboardDone] = useState(false);
 
-  // useEffect(() => {
-  //   const checkOnboardStatus = async () => {
-  //     const onboardStatus = await getItemAsync('onboardStatus');
-  //     if (onboardStatus !== null) {
-  //       setOnboardDone(onboardStatus);
-  //     }
-  //   };
-  //   checkOnboardStatus();
-  // }, []);
+  useEffect(() => {
+    const checkOnboardStatus = async () => {
+      const onboardStatus = await getItemAsync('onboardStatus');
+      if (onboardStatus !== null) {
+        setOnboardDone(onboardStatus);
+      }
+    };
+    checkOnboardStatus();
+  }, []);
 
   if (onboardDone) {
     return(

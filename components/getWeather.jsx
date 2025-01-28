@@ -28,7 +28,6 @@ const getWeatherAndForecast = async (place) => {
       throw new Error("Failed to fetch weather data");
     }
 
-
     const weatherData = await weatherResponse.json();
     const forecastData = await forecastResponse.json();
 
@@ -78,7 +77,7 @@ const getWeatherAndForecast = async (place) => {
     };
 
   }catch (err) {
-    throw new Error("Issue with calling");
+    throw new Error("Issue with calling the API");
   }
 };
 

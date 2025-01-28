@@ -1,14 +1,13 @@
-import { View, Text, ScrollView, TextInput } from 'react-native';
+import { View, ScrollView, TextInput } from 'react-native';
 import React, { useState } from 'react';
 import Home from '../app/(tabs)/home';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Feather from '@expo/vector-icons/Feather';
+import {Feather} from '@expo/vector-icons';
 import getWeather from '../test';
 import { useRouter } from 'expo-router';
 
 const Search = () => {
   const [location, setLocation] = useState("");
-  const [metricSystem, setMetricSystem] = useState("degrees");
   const router = useRouter();
 
   const handleOnSubmitEditing = async () => {
