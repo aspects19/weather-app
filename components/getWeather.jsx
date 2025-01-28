@@ -19,21 +19,24 @@ const getWeatherAndForecast = async (place) => {
   };
   
   try {
-    // const [weatherResponse, forecastResponse] = await Promise.all([
-    //   fetch(weatherUrl, { method: 'GET' }),
-    //   fetch(forecastUrl, { method: 'GET' }),
-    // ]);
+    const [weatherResponse, forecastResponse] = await Promise.all([
+      fetch(weatherUrl, { method: 'GET' }),
+      fetch(forecastUrl, { method: 'GET' }),
+    ]);
     
-    // if (!weatherResponse.ok || !forecastResponse.ok) {
-    //   throw new Error("Failed to fetch weather data");
-    // }
+    if (!weatherResponse.ok || !forecastResponse.ok) {
+      throw new Error("Failed to fetch weather data");
+    }
 
 
-    // const weatherData = await weatherResponse.json();
-    // const forecastData = await forecastResponse.json();
+    const weatherData = await weatherResponse.json();
+    const forecastData = await forecastResponse.json();
 
-     const weatherData = data.weather;
-     const forecastData = data.forecast;
+    // Comment out all lines above in this try block to use dummy data (to prevent rate limiting during development)
+    // Then uncomment the two line below
+
+    //  const weatherData = data.weather;
+    //  const forecastData = data.forecast;
 
     const fullName = weatherData.location.name;
     const fullNameParts = fullName.split(",");
@@ -75,7 +78,7 @@ const getWeatherAndForecast = async (place) => {
     };
 
   }catch (err) {
-    console.log("Error fetching weather data:", err);
+    //console.log("Error fetching weather data:", err);
     throw new Error("Issue with calling");
   }
 };
