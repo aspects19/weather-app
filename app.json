@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "weather-app",
+    "name": "Weather app",
     "slug": "weather-app",
     "scheme": "weather-app",
     "version": "1.0.0",
@@ -14,20 +14,26 @@
       "backgroundColor": "#090a15"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.aspect19.weatherapp"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/app-logo.png",
         "backgroundColor": "#090a15"
-        
-      }
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
+      },
+      "package": "com.aspect19.weatherapp"
     },
     "plugins": [
       "expo-router"
-    ]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "1ae9b33b-9a06-421a-809f-47576fe89c76"
+      }
+    }
   }
 }
