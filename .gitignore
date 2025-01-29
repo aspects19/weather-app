@@ -29,6 +29,9 @@ yarn-error.*
 .DS_Store
 *.pem
 
+# android
+./android
+
 # local env files
 .env*.local
 
@@ -38,3 +41,5 @@ yarn-error.*
 eas.json
 
 .env
+ios/
+android/
