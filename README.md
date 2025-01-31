@@ -16,10 +16,10 @@ Welcome to the Weather App! 🌤️ This app provides real-time weather updates 
   
 ## Previews
 
-<div  style="display:flex; gap: 2%">
-   <img src="./screenshots/screenshot_from_2025-01-29_20-52-31.png" width="30%" alt="Onboard">
-   <img src="./screenshots/screenshot_from_2025-01-29_20-53-11.png" width="30%" alt="home">
-   <img src='./screenshots/screenshot_from_2025-01-29_20-54-14.png' width="30%" alt="Settings">
+<div  style="display:flex; gap: 15px; flex-wrap: wrap">
+   <img src="./screenshots/screenshot_from_2025-01-29_20-52-31.png" width="230" alt="Onboard">
+   <img src="./screenshots/screenshot_from_2025-01-29_20-53-11.png" width="230" alt="home">
+   <img src='./screenshots/screenshot_from_2025-01-29_20-54-14.png' width="230" alt="Settings">
 </div>
 
 ## Installation
