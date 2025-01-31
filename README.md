@@ -3,7 +3,7 @@
 Welcome to the Weather App! 🌤️ This app provides real-time weather updates and forecasts, offering a simple and intuitive interface.
 
 ![React Native](https://img.shields.io/badge/React%20Native-v0.76.6-blue?style=flat&logo=react&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-vES6-yellow?style=flat&logo=javascript&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-vES15-yellow?style=flat&logo=javascript&logoColor=white)
 ![Expo](https://img.shields.io/badge/Expo-v52.0.26-black?style=flat&logo=expo&logoColor=white)
 ![NativeWind](https://img.shields.io/badge/NativeWind-v4.1.23-green?style=flat&logo=tailwind-css&logoColor=white)
 
