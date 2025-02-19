@@ -63,7 +63,7 @@ If You wish to make contributions to this project such as reporting issues and b
 
 ## License
 
-This project is licensed under the MIT License – see the [LICENSE](https://github.com/aspects19/weather-app/LICENSE) file for details.
+This project is licensed under the MIT License – see the [LICENSE](https://github.com/aspects19/weather-app/blob/main/LICENSE) file for details.
 
 ##
 
