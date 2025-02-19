@@ -57,7 +57,7 @@ git checkout -b your-branch-name
 
 ## Code of Conduct
 
-By participating in this project, you agree to adhere to the [Code of Conduct](https://github.com.aspects19/code).
+By participating in this project, you agree to adhere to the [Code of Conduct](https://github.com.aspects19/CODE_OF_CONDUCT.md).
 
 ## Reporting Issues
 
