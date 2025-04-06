@@ -55,7 +55,7 @@ To run the Weather App locally, follow these steps:
 
 ## Building the app
 
-You can download the prebuild apk of this app from [Releases](https://github.com/aspects19/weather-app/releases) section or build it from the sorce code as shown earlier.
+You can download the prebuild apk of this app from [Releases](https://github.com/aspects19/weather-app/releases) section or build it from the source code as shown earlier.
 
 ## Contributions
 
