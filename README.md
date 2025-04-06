@@ -17,9 +17,9 @@ Welcome to the Weather App! 🌤️ This app provides real-time weather updates 
 ## Previews
 
 <div  style="display:flex; gap: 15px; flex-wrap: wrap">
-   <img src="./screenshots/screenshot_from_2025-01-29_20-52-31.png" width="230" alt="Onboard">
-   <img src="./screenshots/screenshot_from_2025-01-29_20-53-11.png" width="230" alt="home">
-   <img src='./screenshots/screenshot_from_2025-01-29_20-54-14.png' width="230" alt="Settings">
+   <img src="https://github.com/aspects19/weather-app/blob/7e0dccf08c3cc36d9edf6ea9165b2c5cda74c81c/screenshots/screenshot_from_2025-01-29_20-52-31.png" width="230" alt="Onboard">
+   <img src="https://github.com/aspects19/weather-app/blob/7e0dccf08c3cc36d9edf6ea9165b2c5cda74c81c/screenshots/screenshot_from_2025-01-29_20-53-11.png" width="230" alt="home">
+   <img src='https://github.com/aspects19/weather-app/blob/7e0dccf08c3cc36d9edf6ea9165b2c5cda74c81c/screenshots/screenshot_from_2025-01-29_20-54-14.png' width="230" alt="Settings">
 </div>
 
 ## Installation
